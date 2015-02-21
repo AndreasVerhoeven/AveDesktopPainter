@@ -1,0 +1,26 @@
+HKCR
+{
+	AveRenderer.ImageTexture.1 = s 'ImageTexture Class'
+	{
+		CLSID = s '{29789238-58DD-468A-A748-4BA04D7E3D9E}'
+	}
+	AveRenderer.ImageTexture = s 'ImageTexture Class'
+	{
+		CLSID = s '{29789238-58DD-468A-A748-4BA04D7E3D9E}'
+		CurVer = s 'AveRenderer.ImageTexture.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {29789238-58DD-468A-A748-4BA04D7E3D9E} = s 'ImageTexture Class'
+		{
+			ProgID = s 'AveRenderer.ImageTexture.1'
+			VersionIndependentProgID = s 'AveRenderer.ImageTexture'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{94FE846F-A859-4C5A-9FBC-FF8B0183880B}'
+		}
+	}
+}

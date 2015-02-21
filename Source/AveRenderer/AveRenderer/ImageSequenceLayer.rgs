@@ -1,0 +1,26 @@
+HKCR
+{
+	AveRenderer.ImageSequenceLayer.1 = s 'ImageSequenceLayer Class'
+	{
+		CLSID = s '{4EBAA14C-585A-4651-BAC3-78838516B7AF}'
+	}
+	AveRenderer.ImageSequenceLayer = s 'ImageSequenceLayer Class'
+	{
+		CLSID = s '{4EBAA14C-585A-4651-BAC3-78838516B7AF}'
+		CurVer = s 'AveRenderer.ImageSequenceLayer.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {4EBAA14C-585A-4651-BAC3-78838516B7AF} = s 'ImageSequenceLayer Class'
+		{
+			ProgID = s 'AveRenderer.ImageSequenceLayer.1'
+			VersionIndependentProgID = s 'AveRenderer.ImageSequenceLayer'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{94FE846F-A859-4C5A-9FBC-FF8B0183880B}'
+		}
+	}
+}

@@ -1,0 +1,34 @@
+// HtmlEffect.idl : IDL source for HtmlEffect
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (HtmlEffect.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(3B817BDF-1185-465B-9C2B-F8A3501B751E),
+	helpstring("IHtmlDesktopEffect Interface"),
+	pointer_default(unique)
+]
+interface IHtmlDesktopEffect : IUnknown{
+};
+[
+	uuid(BFC572CF-94E0-4B7C-A27E-92C86DEBC3B8),
+	version(1.0),
+	helpstring("HtmlEffect 1.0 Type Library")
+]
+library HtmlEffectLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(2E22707D-A5F4-45E8-B8AC-4F79EF528226),
+		helpstring("HtmlDesktopEffect Class")
+	]
+	coclass HtmlDesktopEffect
+	{
+		[default] interface IHtmlDesktopEffect;
+	};
+};

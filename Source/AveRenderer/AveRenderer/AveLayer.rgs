@@ -1,0 +1,26 @@
+HKCR
+{
+	AveRenderer.AveLayer.1 = s 'AveLayer Class'
+	{
+		CLSID = s '{383E850E-4EC7-4DB2-AEDC-E22EBF9CCF18}'
+	}
+	AveRenderer.AveLayer = s 'AveLayer Class'
+	{
+		CLSID = s '{383E850E-4EC7-4DB2-AEDC-E22EBF9CCF18}'
+		CurVer = s 'AveRenderer.AveLayer.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {383E850E-4EC7-4DB2-AEDC-E22EBF9CCF18} = s 'AveLayer Class'
+		{
+			ProgID = s 'AveRenderer.AveLayer.1'
+			VersionIndependentProgID = s 'AveRenderer.AveLayer'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{94FE846F-A859-4C5A-9FBC-FF8B0183880B}'
+		}
+	}
+}

@@ -1,0 +1,9 @@
+; AveRenderer.def : Declares the module parameters.
+
+LIBRARY      "AveRenderer.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

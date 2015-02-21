@@ -1,0 +1,26 @@
+HKCR
+{
+	MediaPlayer.TimerEventHandler.1 = s 'TimerEventHandler Class'
+	{
+		CLSID = s '{1FBC40AC-DD5A-497F-A04B-051FEB6B1071}'
+	}
+	MediaPlayer.TimerEventHandler = s 'TimerEventHandler Class'
+	{
+		CLSID = s '{1FBC40AC-DD5A-497F-A04B-051FEB6B1071}'
+		CurVer = s 'MediaPlayer.TimerEventHandler.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {1FBC40AC-DD5A-497F-A04B-051FEB6B1071} = s 'TimerEventHandler Class'
+		{
+			ProgID = s 'MediaPlayer.TimerEventHandler.1'
+			VersionIndependentProgID = s 'MediaPlayer.TimerEventHandler'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{5544F62F-19FA-4383-AB6A-ED96ACABA1EE}'
+		}
+	}
+}

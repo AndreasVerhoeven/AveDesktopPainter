@@ -1,0 +1,259 @@
+// AveDesktopApp.idl : IDL source for AveDesktopApp
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (AveDesktopApp.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+import "../../AveSkinProvider/AveSkinProvider/AveSkinProvider.idl";
+
+interface IAveDesktopItem;
+interface IAveHostedDesktopItem;
+interface IAveSettings;
+interface IAvePresenter;
+
+[
+	object,
+	uuid(80073145-C801-4227-8AC5-434D51D568E1),
+	helpstring("IAveDesktopHost Interface"),
+	pointer_default(unique)
+]
+interface IAveDesktopHost : IUnknown{
+	[helpstring("method InitializeHost")] HRESULT InitializeHost(void);
+	[helpstring("method Start")] HRESULT Start(void);
+	[helpstring("method Stop")] HRESULT Stop(void);
+	[helpstring("method IsRunning")] HRESULT IsRunning([out,retval] VARIANT_BOOL* pIsRunning);
+	[helpstring("method AddRenderInterval")] HRESULT AddRenderInterval([in] ULONG renderIntervalInMs);
+	[helpstring("method RemoveRenderInterval")] HRESULT RemoveRenderInterval([in] ULONG renderIntervalInMs);
+	[helpstring("method AddItem")] HRESULT AddItem([in] IAveDesktopItem* item);
+	[helpstring("method GetItemCount")] HRESULT GetItemCount([out,retval] DWORD* pCount);
+	[helpstring("method GetItemByIndex")] HRESULT GetItemByIndex([in] DWORD index, [out,retval] IAveHostedDesktopItem** hostedItem);
+	[helpstring("method MoveItem")] HRESULT MoveItem([in] DWORD oldIndex, [in] DWORD newIndex);
+	[helpstring("method RemoveItem")] HRESULT RemoveItem([in] IAveHostedDesktopItem* hostedItem);
+	[helpstring("method SaveConfiguration")] HRESULT SaveConfiguration(void);
+	[helpstring("method EnableDesignMode")] HRESULT EnableDesignMode([in] BOOL enable);
+	[helpstring("method GetIsInDesignMode")] HRESULT GetIsInDesignMode([out,retval] BOOL* pIsInDesignMode);
+};
+[
+	object,
+	uuid(C8BA40D6-37A1-4F88-A0B3-74C3152E5088),
+	helpstring("IAveHostedDesktopItem Interface"),
+	pointer_default(unique)
+]
+interface IAveHostedDesktopItem : IUnknown{
+	[helpstring("method Initialize")] HRESULT Initialize([in] IUnknown* directDeviceAsUnknown, [in] IUnknown* topLayerAsUnknown, [in] IAveDesktopItem* item);
+	[helpstring("method Uninitialize")] HRESULT Uninitialize(void);
+	[helpstring("method GetDirectDevice")] HRESULT GetDirectDevice([out,retval] IUnknown** directDeviceAsUnknown);
+	[helpstring("method GetCompositeLayer")] HRESULT GetCompositeLayer([out,retval] IUnknown** layerAsUnknown);
+	[helpstring("method KillTimer")] HRESULT KillTimer(UINT id);
+	[helpstring("method SetTimer")] HRESULT SetTimer([in] UINT elapse, [out,retval] UINT* id);
+	[helpstring("method GetItem")] HRESULT GetItem([out,retval] IAveDesktopItem** pItem);
+	[helpstring("method SetGuid")] HRESULT SetGuid([in] GUID guid);
+	[helpstring("method GetGuid")] HRESULT GetGuid([out,retval] GUID* pGuid);
+	[helpstring("method GetGuidAsString")] HRESULT GetGuidAsString([out,retval] BSTR* pGuidAsString);
+	[helpstring("method SetSettings")] HRESULT SetSettings([in] IAveSettings* settings);
+	[helpstring("method GetSettings")] HRESULT GetSettings([out,retval] IAveSettings** pSettings);
+	[helpstring("method GetCLSID")] HRESULT GetCLSID([out,retval] CLSID* pCLSID);
+	[helpstring("method SaveSettings")] HRESULT SaveSettings(void);
+	[helpstring("method GetWindow")] HRESULT GetWindow([out,retval] HWND* hwnd);
+	[helpstring("method SetPresenter")] HRESULT SetPresenter([in] IAvePresenter* presenter);
+	[helpstring("method GetPresenter")] HRESULT GetPresenter([out,retval] IAvePresenter** pPresenter);
+	[helpstring("method GetSkin")] HRESULT GetSkin([out,retval] IAveSkin** pSkin);
+	[helpstring("method SetSkin")] HRESULT SetSkin([in] IAveSkin* skin);
+};
+[
+	object,
+	uuid(B584E63E-2F0A-42C9-AC00-3CAB30717A41),
+	helpstring("IAveDesktopItem Interface"),
+	pointer_default(unique)
+]
+interface IAveDesktopItem : IUnknown{
+	[helpstring("method Initialize")] HRESULT Initialize([in] IAveHostedDesktopItem* hostedItem);
+	[helpstring("method Uninitialize")] HRESULT Uninitialize(void);
+	[helpstring("method OnTimer")] HRESULT OnTimer([in] UINT id);
+	[helpstring("method GetName")] HRESULT GetName([out,retval] BSTR* pName);
+	[helpstring("method GetAuthor")] HRESULT GetAuthor([out,retval] BSTR* pAuthor);
+	[helpstring("method GetDescription")] HRESULT GetDescription([out,retval] BSTR* pDescription);
+	[helpstring("method GetIcon")] HRESULT GetIcon([out,retval] HBITMAP* hBitmap);
+	[helpstring("method GetCLSID")] HRESULT GetCLSID([out,retval] CLSID* pCLSID);
+	[helpstring("method GetConfigureDialog")] HRESULT GetConfigureDialog([out] HWND* configureDlg, [in]HWND parent);
+	[helpstring("method DoesSupport")] HRESULT DoesSupport([in] DWORD flag, [out,retval] BOOL* pDoesSupport);
+	[helpstring("method OnWindowMessage")] HRESULT OnWindowMessage([in]HWND hwnd, [in]UINT msg, [in]WPARAM wParam, [in]LPARAM lParam, [out]LRESULT* lResult, [out]BOOL* handled);
+	[helpstring("method BeforeRender")] HRESULT BeforeRender(void);
+	[helpstring("method OnSkinChange")] HRESULT OnSkinChange(void);
+};
+[
+	object,
+	uuid(2ECA25DC-FE37-4361-B103-76FB2D1BC8EC),
+	helpstring("IAveSettings Interface"),
+	pointer_default(unique)
+]
+interface IAveSettings : IUnknown{
+	
+	[helpstring("method SetName")] HRESULT SetName([in] BSTR name);
+	[helpstring("method GetName")] HRESULT GetName([out,retval] BSTR* pName);
+	[helpstring("method SetFullyQualifiedName")] HRESULT SetFullyQualifiedName([in] BSTR name);
+	[helpstring("method GetFullyQualifiedName")] HRESULT GetFullyQualifiedName([out, retval] BSTR* pName);
+	[helpstring("method SetStringValue")] HRESULT SetStringValue([in] BSTR key, [in]BSTR value);
+	[helpstring("method GetStringValue")] HRESULT GetStringValue([in] BSTR key, [in]BSTR defaultValue, [out] BSTR* value);
+	[helpstring("method SetIntValue")] HRESULT SetIntValue([in] BSTR key, [in]DWORD value);
+	[helpstring("method GetIntValue")] HRESULT GetIntValue([in] BSTR key, [in]DWORD defaultValue, [out] DWORD* value);
+	[helpstring("method GetKeyCount")] HRESULT GetKeyCount([out] DWORD* pCount);
+	[helpstring("method GetKeyName")] HRESULT GetKeyName([in]DWORD index, [out] BSTR* name);
+	[helpstring("method GetKeyType")] HRESULT GetKeyType([in]DWORD index, [out] DWORD* pType);
+	[helpstring("method RemoveKeyByName")] HRESULT RemoveKeyByName([in]BSTR name);
+
+	[helpstring("method GetChildrenCount")] HRESULT GetChildrenCount([out] DWORD* pCount);
+	[helpstring("method GetChildByIndex")] HRESULT GetChildByIndex([in]DWORD index, [out] IAveSettings** settings);
+	[helpstring("method GetChildByName")] HRESULT GetChildByName([in]BSTR name, [out] IAveSettings** settings);
+	[helpstring("method RemoveChildByName")] HRESULT RemoveChildByName([in]BSTR name);
+	
+	[helpstring("method SetFloatValue")] HRESULT SetFloatValue([in] BSTR key, [in] float value);
+	[helpstring("method GetFloatValue")] HRESULT GetFloatValue([in] BSTR key, [in] float defaultValue, [out,retval] float* pValue);
+};
+[
+	object,
+	uuid(2A63C147-BFC6-46DE-8671-B101A08AF946),
+	helpstring("IAveDesktopItemPicture Interface"),
+	pointer_default(unique)
+]
+interface IAveDesktopItemPicture : IUnknown{
+};
+[
+	object,
+	uuid(C38E21AD-9EEB-4DAB-B253-FE2766E8098F),
+	helpstring("IAveDesktopItemEnum Interface"),
+	pointer_default(unique)
+]
+interface IAveDesktopItemEnum : IUnknown{
+	[helpstring("method Start")] HRESULT Start(void);
+	[helpstring("method GetCount")] HRESULT GetCount([out,retval] DWORD* pCount);
+	[helpstring("method GetStringInfo")] HRESULT GetStringInfo([in] DWORD index, [in] DWORD infoType, [out,retval] BSTR* infoValue);
+	[helpstring("method GetCLSID")] HRESULT GetCLSID([in] DWORD index, [in] DWORD infoType, [out,retval] CLSID* pCLSID);
+};
+[
+	object,
+	uuid(2DD1E357-E4E0-4762-BF09-58875047103C),
+	helpstring("IAveDesktopItemScribbler Interface"),
+	pointer_default(unique)
+]
+interface IAveDesktopItemScribbler : IUnknown{
+};
+[
+	object,
+	uuid(990BC7D1-AE10-49C3-BBD9-10CA5AE333CD),
+	helpstring("IAveDesktopItemVideo Interface"),
+	pointer_default(unique)
+]
+interface IAveDesktopItemVideo : IUnknown{
+};
+[
+	object,
+	uuid(51496817-0FEE-4666-968E-4A07DC2FD7BB),
+	helpstring("IAvePresenter Interface"),
+	pointer_default(unique)
+]
+interface IAvePresenter : IUnknown{
+	[helpstring("method AddPresentationInterval")] HRESULT AddPresentationInterval([in] DWORD interval);
+	[helpstring("method RemovePresentationInterval")] HRESULT RemovePresentationInterval([in] DWORD interval);
+	[helpstring("method PresentNow")] HRESULT PresentNow(void);
+};
+[
+	object,
+	uuid(324550AA-971E-48C8-BEB9-531A660058BC),
+	helpstring("IDesktopItemMediaPlayerAlbums Interface"),
+	pointer_default(unique)
+]
+interface IDesktopItemMediaPlayerAlbums : IUnknown{
+};
+[
+	uuid(21FC0FDF-8BCC-42D9-9A8B-F15331090993),
+	version(1.0),
+	helpstring("AveDesktopApp 1.0 Type Library")
+]
+library AveDesktopAppLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(7186B10A-616F-4778-B092-DA70331B8A50),
+		helpstring("AveDesktopHost Class")
+	]
+	coclass AveDesktopHost
+	{
+		[default] interface IAveDesktopHost;
+	};
+	[
+		uuid(0016DFE9-16D6-4CD6-9701-F6F74B2B136A),
+		helpstring("AveHostedDesktopItem Class")
+	]
+	coclass AveHostedDesktopItem
+	{
+		[default] interface IAveHostedDesktopItem;
+	};
+	[
+		uuid(F7A4BAC0-7F0B-479B-8E3C-43F93595C3A9),
+		helpstring("AveDesktopItem Class")
+	]
+	coclass AveDesktopItem
+	{
+		[default] interface IAveDesktopItem;
+	};
+	[
+		uuid(0A82DCE4-1264-4836-A9B5-3351E3E26A19),
+		helpstring("AveSettings Class")
+	]
+	coclass AveSettings
+	{
+		[default] interface IAveSettings;
+	};
+	[
+		uuid(951DD929-5733-4313-9D7B-F4F01BBEC46D),
+		helpstring("AveDesktopItemPicture Class")
+	]
+	coclass AveDesktopItemPicture
+	{
+		[default] interface IAveDesktopItemPicture;
+	};
+	[
+		uuid(740A9522-C0B4-41A0-AA99-654B1F4CF7CF),
+		helpstring("AveDesktopItemEnum Class")
+	]
+	coclass AveDesktopItemEnum
+	{
+		[default] interface IAveDesktopItemEnum;
+	};
+	[
+		uuid(88228A46-7806-4483-BF82-82E95CB260CD),
+		helpstring("AveDesktopItemScribbler Class")
+	]
+	coclass AveDesktopItemScribbler
+	{
+		[default] interface IAveDesktopItemScribbler;
+	};
+	[
+		uuid(05E8A755-9CD0-4F84-BDA4-C195D5B52E06),
+		helpstring("AveDesktopItemVideo Class")
+	]
+	coclass AveDesktopItemVideo
+	{
+		[default] interface IAveDesktopItemVideo;
+	};
+	[
+		uuid(638F8362-938D-41A7-B9B3-587AB98EEB7D),
+		helpstring("AvePresenter Class")
+	]
+	coclass AvePresenter
+	{
+		[default] interface IAvePresenter;
+	};
+	[
+		uuid(D39A97CC-B74E-43E8-B460-43189018F28D),
+		helpstring("DesktopItemMediaPlayerAlbums Class")
+	]
+	coclass DesktopItemMediaPlayerAlbums
+	{
+		[default] interface IDesktopItemMediaPlayerAlbums;
+	};
+};

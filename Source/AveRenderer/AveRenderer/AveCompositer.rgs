@@ -1,0 +1,26 @@
+HKCR
+{
+	AveRenderer.AveCompositer.1 = s 'AveCompositer Class'
+	{
+		CLSID = s '{160ADB0B-4275-4527-BDA0-D42EC22B9A52}'
+	}
+	AveRenderer.AveCompositer = s 'AveCompositer Class'
+	{
+		CLSID = s '{160ADB0B-4275-4527-BDA0-D42EC22B9A52}'
+		CurVer = s 'AveRenderer.AveCompositer.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {160ADB0B-4275-4527-BDA0-D42EC22B9A52} = s 'AveCompositer Class'
+		{
+			ProgID = s 'AveRenderer.AveCompositer.1'
+			VersionIndependentProgID = s 'AveRenderer.AveCompositer'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{94FE846F-A859-4C5A-9FBC-FF8B0183880B}'
+		}
+	}
+}

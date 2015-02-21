@@ -1,0 +1,26 @@
+HKCR
+{
+	AveEventDispatcher.AveEventHandler.1 = s 'AveEventHandler Class'
+	{
+		CLSID = s '{C53131DA-FC1A-4B66-9A54-DE63715AE44F}'
+	}
+	AveEventDispatcher.AveEventHandler = s 'AveEventHandler Class'
+	{
+		CLSID = s '{C53131DA-FC1A-4B66-9A54-DE63715AE44F}'
+		CurVer = s 'AveEventDispatcher.AveEventHandler.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {C53131DA-FC1A-4B66-9A54-DE63715AE44F} = s 'AveEventHandler Class'
+		{
+			ProgID = s 'AveEventDispatcher.AveEventHandler.1'
+			VersionIndependentProgID = s 'AveEventDispatcher.AveEventHandler'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{4648991D-E49E-4950-A018-37A4007A9F30}'
+		}
+	}
+}

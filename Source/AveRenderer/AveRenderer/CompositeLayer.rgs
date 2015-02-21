@@ -1,0 +1,26 @@
+HKCR
+{
+	AveRenderer.CompositeLayer.1 = s 'CompositeLayer Class'
+	{
+		CLSID = s '{BB0F68C6-3A9C-47E0-AA43-0D87B4C5A47A}'
+	}
+	AveRenderer.CompositeLayer = s 'CompositeLayer Class'
+	{
+		CLSID = s '{BB0F68C6-3A9C-47E0-AA43-0D87B4C5A47A}'
+		CurVer = s 'AveRenderer.CompositeLayer.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {BB0F68C6-3A9C-47E0-AA43-0D87B4C5A47A} = s 'CompositeLayer Class'
+		{
+			ProgID = s 'AveRenderer.CompositeLayer.1'
+			VersionIndependentProgID = s 'AveRenderer.CompositeLayer'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{94FE846F-A859-4C5A-9FBC-FF8B0183880B}'
+		}
+	}
+}

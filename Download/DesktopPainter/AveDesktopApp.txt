@@ -1,0 +1,35 @@
+AveDesktopApp (working name)
+============================
+(c) Andreas Verhoeven, 2007.
+
+andreasverhoeven@hotmail.com
+
+
+I. 	REQUIREMENTS
+II.	INSTALL & RUN
+III.	UNINSTALL
+
+
+I. REQUIREMENTS
+
+ +Windows Vista 
+ + Windows Aero (must be running) 
+ + A sufficient graphic card - most Aero capable cards will do, except for some onboard cards. 
+
+ + Visual Studio 2005 SP1 Runtime Files: http://www.microsoft.com/downloads/details.aspx?familyid=200b2fd9-ae1a-4a14-984d-389c36f85647&displaylang=en
+
+ + DirectX 9.0c November 2007 Runtime : http://www.microsoft.com/downloads/details.aspx?familyid=2da43d38-db71-4c1b-bc6a-9b6652cd92a3&displaylang=en
+
+
+II. INSTALL & RUN
+
+ + Install by running install.bat with ADMIN privileges.
+ + Skins located in the SKINS folder first need to be installed by double-clicking them
+	before they will be used.
+ + Right click on the desktop and pick 'Start Desktop Painter'
+ + Right click on the desktop and pick 'Configure DesktopPainter'
+
+
+III. UNINSTALL
+
+Restart explorer.exe, delete the files.

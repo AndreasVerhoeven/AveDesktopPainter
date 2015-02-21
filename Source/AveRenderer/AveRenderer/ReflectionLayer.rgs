@@ -1,0 +1,26 @@
+HKCR
+{
+	AveRenderer.ReflectionLayer.1 = s 'ReflectionLayer Class'
+	{
+		CLSID = s '{EBF83E35-B608-4F9C-A94B-349D66C6BBD9}'
+	}
+	AveRenderer.ReflectionLayer = s 'ReflectionLayer Class'
+	{
+		CLSID = s '{EBF83E35-B608-4F9C-A94B-349D66C6BBD9}'
+		CurVer = s 'AveRenderer.ReflectionLayer.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {EBF83E35-B608-4F9C-A94B-349D66C6BBD9} = s 'ReflectionLayer Class'
+		{
+			ProgID = s 'AveRenderer.ReflectionLayer.1'
+			VersionIndependentProgID = s 'AveRenderer.ReflectionLayer'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{94FE846F-A859-4C5A-9FBC-FF8B0183880B}'
+		}
+	}
+}

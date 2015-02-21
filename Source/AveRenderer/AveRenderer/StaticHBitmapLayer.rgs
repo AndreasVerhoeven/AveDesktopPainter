@@ -1,0 +1,26 @@
+HKCR
+{
+	AveRenderer.StaticHBitmapLayer.1 = s 'StaticHBitmapLayer Class'
+	{
+		CLSID = s '{6B547F33-EE55-4A24-9753-3D586F4D5EBC}'
+	}
+	AveRenderer.StaticHBitmapLayer = s 'StaticHBitmapLayer Class'
+	{
+		CLSID = s '{6B547F33-EE55-4A24-9753-3D586F4D5EBC}'
+		CurVer = s 'AveRenderer.StaticHBitmapLayer.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {6B547F33-EE55-4A24-9753-3D586F4D5EBC} = s 'StaticHBitmapLayer Class'
+		{
+			ProgID = s 'AveRenderer.StaticHBitmapLayer.1'
+			VersionIndependentProgID = s 'AveRenderer.StaticHBitmapLayer'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{94FE846F-A859-4C5A-9FBC-FF8B0183880B}'
+		}
+	}
+}

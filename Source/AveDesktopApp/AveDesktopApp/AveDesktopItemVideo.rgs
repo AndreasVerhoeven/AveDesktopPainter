@@ -1,0 +1,47 @@
+HKCR
+{
+	AveDesktopApp.AveDesktopItemVideo.1 = s 'AveDesktopItemVideo Class'
+	{
+		CLSID = s '{05E8A755-9CD0-4F84-BDA4-C195D5B52E06}'
+	}
+	AveDesktopApp.AveDesktopItemVideo = s 'AveDesktopItemVideo Class'
+	{
+		CLSID = s '{05E8A755-9CD0-4F84-BDA4-C195D5B52E06}'
+		CurVer = s 'AveDesktopApp.AveDesktopItemVideo.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {05E8A755-9CD0-4F84-BDA4-C195D5B52E06} = s 'AveDesktopItemVideo Class'
+		{
+			ProgID = s 'AveDesktopApp.AveDesktopItemVideo.1'
+			VersionIndependentProgID = s 'AveDesktopApp.AveDesktopItemVideo'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{21FC0FDF-8BCC-42D9-9A8B-F15331090993}'
+		}
+	}
+}
+
+HKLM
+{
+	NoRemove Software
+	{
+		NoRemove AveSoftware
+		{
+			NoRemove AveDesktopApp
+			{
+				NoRemove InstalledObjects
+				{
+					ForceRemove {05E8A755-9CD0-4F84-BDA4-C195D5B52E06}
+					{
+						val CLSID	= s '{05E8A755-9CD0-4F84-BDA4-C195D5B52E06}'
+						val Name	= s 'Movie'
+					}
+				}
+			}
+		}
+	}
+}

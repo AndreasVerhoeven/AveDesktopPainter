@@ -1,0 +1,46 @@
+HKCR
+{
+	HtmlEffect.HtmlDesktopEffect.1 = s 'HtmlDesktopEffect Class'
+	{
+		CLSID = s '{2E22707D-A5F4-45E8-B8AC-4F79EF528226}'
+	}
+	HtmlEffect.HtmlDesktopEffect = s 'HtmlDesktopEffect Class'
+	{
+		CLSID = s '{2E22707D-A5F4-45E8-B8AC-4F79EF528226}'
+		CurVer = s 'HtmlEffect.HtmlDesktopEffect.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {2E22707D-A5F4-45E8-B8AC-4F79EF528226} = s 'HtmlDesktopEffect Class'
+		{
+			ProgID = s 'HtmlEffect.HtmlDesktopEffect.1'
+			VersionIndependentProgID = s 'HtmlEffect.HtmlDesktopEffect'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{BFC572CF-94E0-4B7C-A27E-92C86DEBC3B8}'
+		}
+	}
+}
+
+HKEY_LOCAL_MACHINE
+{
+    NoRemove SOFTWARE
+    {
+        NoRemove AveSoftware
+        {
+            NoRemove AveDesktopEffects
+            {
+                NoRemove Effects
+                {
+                    NoRemove Flash
+                    {
+                        val classid = s '{2E22707D-A5F4-45E8-B8AC-4F79EF528226}'
+                    }
+                }
+            }
+        }
+    }
+}

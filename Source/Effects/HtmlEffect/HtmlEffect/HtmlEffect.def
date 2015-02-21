@@ -1,0 +1,9 @@
+; HtmlEffect.def : Declares the module parameters.
+
+LIBRARY      "HtmlEffect.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

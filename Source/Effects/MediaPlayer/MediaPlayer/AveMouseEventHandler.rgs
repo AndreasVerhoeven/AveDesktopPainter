@@ -1,0 +1,26 @@
+HKCR
+{
+	MediaPlayer.AveMouseEventHandler.1 = s 'AveMouseEventHandler Class'
+	{
+		CLSID = s '{308EB1CD-760B-4356-9608-4C0696AE9A4E}'
+	}
+	MediaPlayer.AveMouseEventHandler = s 'AveMouseEventHandler Class'
+	{
+		CLSID = s '{308EB1CD-760B-4356-9608-4C0696AE9A4E}'
+		CurVer = s 'MediaPlayer.AveMouseEventHandler.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {308EB1CD-760B-4356-9608-4C0696AE9A4E} = s 'AveMouseEventHandler Class'
+		{
+			ProgID = s 'MediaPlayer.AveMouseEventHandler.1'
+			VersionIndependentProgID = s 'MediaPlayer.AveMouseEventHandler'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{5544F62F-19FA-4383-AB6A-ED96ACABA1EE}'
+		}
+	}
+}

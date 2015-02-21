@@ -1,0 +1,47 @@
+HKCR
+{
+	AveDesktopApp.AveDesktopItemScribbler.1 = s 'AveDesktopItemScribbler Class'
+	{
+		CLSID = s '{88228A46-7806-4483-BF82-82E95CB260CD}'
+	}
+	AveDesktopApp.AveDesktopItemScribbler = s 'AveDesktopItemScribbler Class'
+	{
+		CLSID = s '{88228A46-7806-4483-BF82-82E95CB260CD}'
+		CurVer = s 'AveDesktopApp.AveDesktopItemScribbler.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {88228A46-7806-4483-BF82-82E95CB260CD} = s 'AveDesktopItemScribbler Class'
+		{
+			ProgID = s 'AveDesktopApp.AveDesktopItemScribbler.1'
+			VersionIndependentProgID = s 'AveDesktopApp.AveDesktopItemScribbler'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{21FC0FDF-8BCC-42D9-9A8B-F15331090993}'
+		}
+	}
+}
+
+HKLM
+{
+	NoRemove Software
+	{
+		NoRemove AveSoftware
+		{
+			NoRemove AveDesktopApp
+			{
+				NoRemove InstalledObjects
+				{
+					ForceRemove {88228A46-7806-4483-BF82-82E95CB260CD}
+					{
+						val CLSID	= s '{88228A46-7806-4483-BF82-82E95CB260CD}'
+						val Name	= s 'Scribbler'
+					}
+				}
+			}
+		}
+	}
+}

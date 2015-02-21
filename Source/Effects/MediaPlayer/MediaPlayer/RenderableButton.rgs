@@ -1,0 +1,26 @@
+HKCR
+{
+	MediaPlayer.RenderableButton.1 = s 'RenderableButton Class'
+	{
+		CLSID = s '{1E5AE03C-1B54-49C9-9DD4-4EB9FD4202B7}'
+	}
+	MediaPlayer.RenderableButton = s 'RenderableButton Class'
+	{
+		CLSID = s '{1E5AE03C-1B54-49C9-9DD4-4EB9FD4202B7}'
+		CurVer = s 'MediaPlayer.RenderableButton.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {1E5AE03C-1B54-49C9-9DD4-4EB9FD4202B7} = s 'RenderableButton Class'
+		{
+			ProgID = s 'MediaPlayer.RenderableButton.1'
+			VersionIndependentProgID = s 'MediaPlayer.RenderableButton'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{5544F62F-19FA-4383-AB6A-ED96ACABA1EE}'
+		}
+	}
+}

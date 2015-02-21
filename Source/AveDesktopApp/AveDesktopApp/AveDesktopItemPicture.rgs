@@ -1,0 +1,47 @@
+HKCR
+{
+	AveDesktopApp.AveDesktopItemPicture.1 = s 'AveDesktopItemPicture Class'
+	{
+		CLSID = s '{951DD929-5733-4313-9D7B-F4F01BBEC46D}'
+	}
+	AveDesktopApp.AveDesktopItemPicture = s 'AveDesktopItemPicture Class'
+	{
+		CLSID = s '{951DD929-5733-4313-9D7B-F4F01BBEC46D}'
+		CurVer = s 'AveDesktopApp.AveDesktopItemPicture.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {951DD929-5733-4313-9D7B-F4F01BBEC46D} = s 'AveDesktopItemPicture Class'
+		{
+			ProgID = s 'AveDesktopApp.AveDesktopItemPicture.1'
+			VersionIndependentProgID = s 'AveDesktopApp.AveDesktopItemPicture'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{21FC0FDF-8BCC-42D9-9A8B-F15331090993}'
+		}
+	}
+}
+
+HKLM
+{
+	NoRemove Software
+	{
+		NoRemove AveSoftware
+		{
+			NoRemove AveDesktopApp
+			{
+				NoRemove InstalledObjects
+				{
+					ForceRemove {951DD929-5733-4313-9D7B-F4F01BBEC46D}
+					{
+						val CLSID	= s '{951DD929-5733-4313-9D7B-F4F01BBEC46D}'
+						val Name	= s 'Clock'
+					}
+				}
+			}
+		}
+	}
+}

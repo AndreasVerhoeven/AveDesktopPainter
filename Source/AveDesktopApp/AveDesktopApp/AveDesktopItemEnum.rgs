@@ -1,0 +1,26 @@
+HKCR
+{
+	AveDesktopApp.AveDesktopItemEnum.1 = s 'AveDesktopItemEnum Class'
+	{
+		CLSID = s '{740A9522-C0B4-41A0-AA99-654B1F4CF7CF}'
+	}
+	AveDesktopApp.AveDesktopItemEnum = s 'AveDesktopItemEnum Class'
+	{
+		CLSID = s '{740A9522-C0B4-41A0-AA99-654B1F4CF7CF}'
+		CurVer = s 'AveDesktopApp.AveDesktopItemEnum.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {740A9522-C0B4-41A0-AA99-654B1F4CF7CF} = s 'AveDesktopItemEnum Class'
+		{
+			ProgID = s 'AveDesktopApp.AveDesktopItemEnum.1'
+			VersionIndependentProgID = s 'AveDesktopApp.AveDesktopItemEnum'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{21FC0FDF-8BCC-42D9-9A8B-F15331090993}'
+		}
+	}
+}

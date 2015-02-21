@@ -1,0 +1,26 @@
+HKCR
+{
+	AveDesktopApp.AveSettings.1 = s 'AveSettings Class'
+	{
+		CLSID = s '{33558D4A-F8B1-4C08-9BF7-4D1407DE30FC}'
+	}
+	AveDesktopApp.AveSettings = s 'AveSettings Class'
+	{
+		CLSID = s '{33558D4A-F8B1-4C08-9BF7-4D1407DE30FC}'
+		CurVer = s 'AveDesktopApp.AveSettings.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {33558D4A-F8B1-4C08-9BF7-4D1407DE30FC} = s 'AveSettings Class'
+		{
+			ProgID = s 'AveDesktopApp.AveSettings.1'
+			VersionIndependentProgID = s 'AveDesktopApp.AveSettings'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{21FC0FDF-8BCC-42D9-9A8B-F15331090993}'
+		}
+	}
+}

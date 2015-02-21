@@ -1,0 +1,26 @@
+HKCR
+{
+	AveRenderer.CDCLayer.1 = s 'CDCLayer Class'
+	{
+		CLSID = s '{AE4DA28E-FB62-49A9-AE87-12E43753C9BF}'
+	}
+	AveRenderer.CDCLayer = s 'CDCLayer Class'
+	{
+		CLSID = s '{AE4DA28E-FB62-49A9-AE87-12E43753C9BF}'
+		CurVer = s 'AveRenderer.CDCLayer.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {AE4DA28E-FB62-49A9-AE87-12E43753C9BF} = s 'CDCLayer Class'
+		{
+			ProgID = s 'AveRenderer.CDCLayer.1'
+			VersionIndependentProgID = s 'AveRenderer.CDCLayer'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{94FE846F-A859-4C5A-9FBC-FF8B0183880B}'
+		}
+	}
+}

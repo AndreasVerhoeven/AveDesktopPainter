@@ -1,0 +1,26 @@
+HKCR
+{
+	MediaPlayer.RenderRequestable.1 = s 'RenderRequestable Class'
+	{
+		CLSID = s '{D8B6A24A-9C46-4359-988C-1B5442E03C5C}'
+	}
+	MediaPlayer.RenderRequestable = s 'RenderRequestable Class'
+	{
+		CLSID = s '{D8B6A24A-9C46-4359-988C-1B5442E03C5C}'
+		CurVer = s 'MediaPlayer.RenderRequestable.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {D8B6A24A-9C46-4359-988C-1B5442E03C5C} = s 'RenderRequestable Class'
+		{
+			ProgID = s 'MediaPlayer.RenderRequestable.1'
+			VersionIndependentProgID = s 'MediaPlayer.RenderRequestable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{5544F62F-19FA-4383-AB6A-ED96ACABA1EE}'
+		}
+	}
+}

@@ -1,0 +1,111 @@
+// AveSkinProvider.idl : IDL source for AveSkinProvider
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (AveSkinProvider.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+import "../../AveRenderer/AveRenderer/AveRenderer.idl";
+
+interface IAveSkinInfo;
+interface IAveLayersMapping;
+interface IAveSkin;
+
+[
+	object,
+	uuid(D1D8FB0F-47B4-4AE3-BFDA-0820696B1133),
+	helpstring("IAveSkinsProvider Interface"),
+	pointer_default(unique)
+]
+interface IAveSkinsProvider : IUnknown{
+	[helpstring("method StartEnumerating")] HRESULT StartEnumerating([in] CLSID* itemCLSID, [in] BOOL async);
+	[helpstring("method StopEnumerating")] HRESULT StopEnumerating(void);
+	[helpstring("method SetAsyncCallbackWindow")] HRESULT SetAsyncCallbackWindow([in] HWND hwnd, [in] UINT msg);
+	[helpstring("method GetSkinCount")] HRESULT GetSkinCount([out,retval] DWORD* pCount);
+	[helpstring("method GetSkin")] HRESULT GetSkin([in] DWORD index, [out,retval] IAveSkinInfo** pInfo);
+	[helpstring("method InstantiateSkin")] HRESULT InstantiateSkin([in] IAveSkinInfo* info, [out,retval] IAveSkin** skin);
+	[helpstring("method InstantiateSkinFromGUID")] HRESULT InstantiateSkinFromGUID([in] GUID skinGUID, [in] CLSID itemCLSID, [out,retval] IAveSkin** pSkin);
+};
+[
+	object,
+	uuid(132A8496-C0D4-46BA-9EE5-58B07A3F69B9),
+	helpstring("IAveSkinInfo Interface"),
+	pointer_default(unique)
+]
+interface IAveSkinInfo : IUnknown{
+	[helpstring("method GetName")] HRESULT GetName([out,retval] BSTR* pName);
+	[helpstring("method GetGUID")] HRESULT GetGUID([out,retval] GUID* pGUID);
+	[helpstring("method GetDesktopItemCLSID")] HRESULT GetDesktopItemCLSID([out,retval] CLSID* pCLSID);
+	[helpstring("method GetInfoValue")] HRESULT GetInfoValue([in] BSTR key, [out,retval] BSTR* pValue);
+};
+[
+	object,
+	uuid(2E348F98-BD70-49CB-B1C6-1D19EBC14FF4),
+	helpstring("IAveSkin Interface"),
+	pointer_default(unique)
+]
+interface IAveSkin : IUnknown{
+	[helpstring("method GetGUID")] HRESULT GetGUID([out,retval] GUID* pGUID);
+	[helpstring("method DoesSupportItem")] HRESULT DoesSupportItem([in] CLSID itemCLSID, [out, retval] BOOL* doesSupport);
+	[helpstring("method GetInfoString")] HRESULT GetInfoString([in] BSTR key, [out,retval] BSTR* value);
+	[helpstring("method CheckRequirements")] HRESULT CheckRequirements([out] BOOL* doesSupport, [out] BSTR* errorMessage);
+	[helpstring("method LoadFile")] HRESULT LoadFile([in] BSTR name, [out] IStream** stream);
+	[helpstring("method BuildLayersFromSection")] HRESULT BuildLayersFromSection([in] BSTR sectionName, [in] ICompositeLayer* topLayer, [out] IAveLayersMapping** mapping);
+	[helpstring("method GetSectionValue")] HRESULT GetSectionValue([in] BSTR section, [in] BSTR key, [in] BSTR defaultValue, [out,retval] BSTR* value);
+};
+[
+	object,
+	uuid(4D123A87-CA72-4F39-9973-E8926EEE04DA),
+	helpstring("IAveLayersMapping Interface"),
+	pointer_default(unique)
+]
+interface IAveLayersMapping : IUnknown{
+	[helpstring("method AddLayer")] HRESULT AddLayer([in] BSTR name, [in] IAveLayer* layer);
+	[helpstring("method GetLayer")] HRESULT GetLayer([in] BSTR name, [out] IAveLayer** pLayer);
+	[helpstring("method Clear")] HRESULT Clear(void);
+	[helpstring("method GetLayerCount")] HRESULT GetLayerCount([in] BSTR name, [out,retval] DWORD* pCount);
+	[helpstring("method GetLayerByIndex")] HRESULT GetLayerByIndex([in] BSTR name, [in] DWORD index, [out,retval] IAveLayer** pLayer);
+};
+[
+	uuid(B0124F3E-6F2F-4655-92C2-44B9E1A19051),
+	version(1.0),
+	helpstring("AveSkinProvider 1.0 Type Library")
+]
+library AveSkinProviderLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(922111C8-5183-4C96-B8B5-EF129DC9FEED),
+		helpstring("AveSkinsProvider Class")
+	]
+	coclass AveSkinsProvider
+	{
+		[default] interface IAveSkinsProvider;
+	};
+	[
+		uuid(16DE81B5-7B1A-404E-9321-1F9F7BBBDF75),
+		helpstring("AveSkinInfo Class")
+	]
+	coclass AveSkinInfo
+	{
+		[default] interface IAveSkinInfo;
+	};
+	[
+		uuid(7FA44743-1F47-42D9-9CB9-16C2C75B7794),
+		helpstring("AveSkin Class")
+	]
+	coclass AveSkin
+	{
+		[default] interface IAveSkin;
+	};
+	[
+		uuid(ABAE4AC4-6A71-4790-A9BF-17AC9413FB94),
+		helpstring("AveLayersMapping Class")
+	]
+	coclass AveLayersMapping
+	{
+		[default] interface IAveLayersMapping;
+	};
+};

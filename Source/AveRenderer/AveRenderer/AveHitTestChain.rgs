@@ -1,0 +1,26 @@
+HKCR
+{
+	AveRenderer.AveHitTestChain.1 = s 'AveHitTestChain Class'
+	{
+		CLSID = s '{6A766B6B-EE67-4730-8478-F97FF29D1975}'
+	}
+	AveRenderer.AveHitTestChain = s 'AveHitTestChain Class'
+	{
+		CLSID = s '{6A766B6B-EE67-4730-8478-F97FF29D1975}'
+		CurVer = s 'AveRenderer.AveHitTestChain.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {6A766B6B-EE67-4730-8478-F97FF29D1975} = s 'AveHitTestChain Class'
+		{
+			ProgID = s 'AveRenderer.AveHitTestChain.1'
+			VersionIndependentProgID = s 'AveRenderer.AveHitTestChain'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{94FE846F-A859-4C5A-9FBC-FF8B0183880B}'
+		}
+	}
+}

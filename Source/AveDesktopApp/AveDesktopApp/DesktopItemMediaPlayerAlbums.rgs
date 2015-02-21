@@ -1,0 +1,47 @@
+HKCR
+{
+	AveDesktopApp.DesktopItemMediaPlayerA.1 = s 'DesktopItemMediaPlayerAlbums Class'
+	{
+		CLSID = s '{D39A97CC-B74E-43E8-B460-43189018F28D}'
+	}
+	AveDesktopApp.DesktopItemMediaPlayerAlb = s 'DesktopItemMediaPlayerAlbums Class'
+	{
+		CLSID = s '{D39A97CC-B74E-43E8-B460-43189018F28D}'
+		CurVer = s 'AveDesktopApp.DesktopItemMediaPlayerA.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {D39A97CC-B74E-43E8-B460-43189018F28D} = s 'DesktopItemMediaPlayerAlbums Class'
+		{
+			ProgID = s 'AveDesktopApp.DesktopItemMediaPlayerA.1'
+			VersionIndependentProgID = s 'AveDesktopApp.DesktopItemMediaPlayerAlb'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{21FC0FDF-8BCC-42D9-9A8B-F15331090993}'
+		}
+	}
+}
+
+HKLM
+{
+	NoRemove Software
+	{
+		NoRemove AveSoftware
+		{
+			NoRemove AveDesktopApp
+			{
+				NoRemove InstalledObjects
+				{
+					ForceRemove {D39A97CC-B74E-43E8-B460-43189018F28D}
+					{
+						val CLSID	= s '{D39A97CC-B74E-43E8-B460-43189018F28D}'
+						val Name	= s 'Album Art Wall'
+					}
+				}
+			}
+		}
+	}
+}

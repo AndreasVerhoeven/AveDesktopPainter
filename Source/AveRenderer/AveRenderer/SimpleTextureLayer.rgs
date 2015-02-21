@@ -1,0 +1,26 @@
+HKCR
+{
+	AveRenderer.SimpleTextureLayer.1 = s 'SimpleTextureLayer Class'
+	{
+		CLSID = s '{540DEAA1-28F3-464B-860A-E0E9DAFE4A8E}'
+	}
+	AveRenderer.SimpleTextureLayer = s 'SimpleTextureLayer Class'
+	{
+		CLSID = s '{540DEAA1-28F3-464B-860A-E0E9DAFE4A8E}'
+		CurVer = s 'AveRenderer.SimpleTextureLayer.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {540DEAA1-28F3-464B-860A-E0E9DAFE4A8E} = s 'SimpleTextureLayer Class'
+		{
+			ProgID = s 'AveRenderer.SimpleTextureLayer.1'
+			VersionIndependentProgID = s 'AveRenderer.SimpleTextureLayer'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{94FE846F-A859-4C5A-9FBC-FF8B0183880B}'
+		}
+	}
+}

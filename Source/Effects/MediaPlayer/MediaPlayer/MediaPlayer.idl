@@ -1,0 +1,508 @@
+// MediaPlayer.idl : IDL source for MediaPlayer
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (MediaPlayer.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+
+interface IRenderRequestable;
+interface IMediaPlayerProvider;
+interface IMediaPlayerProviderEventHandler;
+interface IMediaPlayerEventHandler;
+interface ITimerEventHandler;
+interface ITimerProvider;
+
+[
+]
+enum AveMouseEvent { MouseInvalidEvent, MouseEnter, MouseLeave, MouseMove, MouseLeftDown, MouseLeftUp, MouseRightDown, MouseRight, MouseLostCapture};
+
+enum MediaPlayerProviderEvent { MPPEventInvalid, MPPEventDisconnect, MPPEventConnect, MPPEventShutdown };
+
+enum MediaPlayerEventType { MediaPlayerEventDisconnect, MediaPlayerEventStatusChanged, MediaPlayerEventSongChanged, MediaPlayerEventSoundChanged };
+
+enum TimerEvent {TimerEventFired, TimerEventStarted, TimerEventStopped, TimerEventShutdown};
+
+enum AvePixelType {AvePixelTypeXRGB, AvePixelTypeARGB };
+
+[
+	object,
+	uuid(476B5E4A-2144-49CB-8698-5FECBA468D4D),
+	helpstring("IDesktopEffectMediaPlayer Interface"),
+	pointer_default(unique)
+]
+interface IDesktopEffectMediaPlayer : IUnknown{
+};
+[
+	object,
+	uuid(A6CA64A2-C234-4DE3-8AD4-36F9E55D52ED),
+	helpstring("IRenderOptions Interface"),
+	pointer_default(unique)
+]
+interface IRenderOptions : IUnknown{
+	[helpstring("method GetOutputRect")] HRESULT GetOutputRect([in] RECT* rc);
+	[helpstring("method GetDirectDevice")] HRESULT GetDirectDevice([out,retval] IUnknown** deviceAsUnknown);
+	[helpstring("method PushOffsets")] HRESULT PushOffsets([in] INT x, [in] INT y);
+	[helpstring("method PopOffsets")] HRESULT PopOffsets(void);
+	[helpstring("method GetXOffset")] HRESULT GetXOffset([out,retval] INT* pX);
+	[helpstring("method GetYOffset")] HRESULT GetYOffset([out,retval] INT* pY);
+};
+[
+	object,
+	uuid(E1C339B2-53D9-4AE5-B2D8-3BD90B52157C),
+	helpstring("IRenderable Interface"),
+	pointer_default(unique)
+]
+interface IRenderable : IUnknown{
+	[helpstring("method Render")] HRESULT Render([in] IRenderOptions* options);
+	[helpstring("method HitTest")] HRESULT HitTest([in] INT x, [in] INT y);
+	[helpstring("method PointToRenderable")] HRESULT PointToRenderable([out] INT* x, [out] INT* y);
+	[helpstring("method GetInputRect")] HRESULT GetInputRect([out,retval] RECT* rc);
+	[helpstring("method GetOutputRect")] HRESULT GetOutputRect([out,retval] RECT* rc);
+	[helpstring("method SetInputRect")] HRESULT SetInputRect([in] RECT* rc);
+	[helpstring("method SetOutputRect")] HRESULT SetOutputRect([in] RECT* rc);
+	[helpstring("method Show")] HRESULT Show(void);
+	[helpstring("method Hide")] HRESULT Hide(void);
+};
+[
+	object,
+	uuid(20CFED46-31CC-4780-8471-4488622E117C),
+	helpstring("ISkinOptions Interface"),
+	pointer_default(unique)
+]
+interface ISkinOptions : IUnknown{
+	[helpstring("method GetSkinPath")] HRESULT GetSkinPath([out,retval] BSTR* path);
+	[helpstring("method GetDirectDevice")] HRESULT GetDirectDevice([out,retval] IUnknown** deviceAsUnknown);
+	[helpstring("method GetRenderRequestable")] HRESULT GetRenderRequestable([out,retval] IRenderRequestable** pRenderRequestable);
+	[helpstring("method GetMediaPlayerProvider")] HRESULT GetMediaPlayerProvider([out,retval] IMediaPlayerProvider** provider);
+	[helpstring("method GetTimerProvider")] HRESULT GetTimerProvider([out,retval] ITimerProvider** provider);
+};
+[
+	object,
+	uuid(B87DEFF8-E086-44E5-A3E6-4FC3CC5EEB85),
+	helpstring("ISkinItem Interface"),
+	pointer_default(unique)
+]
+interface ISkinItem : IUnknown{
+	[helpstring("method InitializeFromSkin")] HRESULT InitializeFromSkin([in] IXMLDOMNode* node, [in] ISkinOptions* options);
+};
+
+[
+	object,
+	uuid(4CB6BE1B-CFA5-4665-B346-78A98ED009C2),
+	helpstring("ISkin Interface"),
+	pointer_default(unique)
+]
+interface ISkin : IUnknown{
+	[helpstring("method InitializeFromFile")] HRESULT InitializeFromFile([in] BSTR path, [in] ISkinOptions* options);
+	[helpstring("method Render")] HRESULT Render([in] IRenderOptions* options);
+};
+[
+	object,
+	uuid(88F8E103-42BD-4039-9FEC-C4663CF9F4B1),
+	helpstring("IRenderableImage Interface"),
+	pointer_default(unique)
+]
+interface IRenderableImage : IUnknown{
+};
+[
+	object,
+	uuid(725E1CD5-E7E3-45C3-82CA-B53B45504AE9),
+	helpstring("IAveImage Interface"),
+	pointer_default(unique)
+]
+interface IAveImage : IUnknown{
+
+	[helpstring("method GetWidth")] HRESULT GetWidth([out] DWORD* pWidth);
+	[helpstring("method GetHeight")] HRESULT GetHeight([out] DWORD* pHeight);
+	[helpstring("method GetTexture")] HRESULT GetTexture([out] IUnknown** pTextureAsUnknown);
+	[helpstring("method GetPixelColorForHitTest")] HRESULT GetPixelColorForHitTest([in] DWORD x, [in] DWORD y, [out] DWORD* pColor);
+};
+[
+	object,
+	uuid(86ED504D-1621-4807-B709-C4587470D6E5),
+	helpstring("IRenderableButton Interface"),
+	pointer_default(unique)
+]
+interface IRenderableButton : IUnknown{
+};
+[
+	object,
+	uuid(0684F60A-4F3B-4ECF-98CE-F6EEBE32E0F9),
+	helpstring("IRenderRequestable Interface"),
+	pointer_default(unique)
+]
+interface IRenderRequestable : IUnknown{
+	[helpstring("method RequestRender")] HRESULT RequestRender(void);
+};
+[
+	object,
+	uuid(0AAC9F67-AFC3-4143-B34C-47B93C217B17),
+	helpstring("IMouseEvent Interface"),
+	pointer_default(unique)
+]
+interface IMouseEvent : IUnknown{
+	[helpstring("method GetHasBeenHandled")] HRESULT GetHasBeenHandled([out,retval] BOOL* hasBeenHandled);
+	[helpstring("method SetHasBeenHandled")] HRESULT SetHasBeenHandled([in] BOOL hasBeenHandled);
+	[helpstring("method GetEventType")] HRESULT GetEventType([out,retval] enum AveMouseEvent* eventType);
+	[helpstring("method GetPoint")] HRESULT GetPoint([out] INT* x, [out] INT* y);
+	[helpstring("method SetPoint")] HRESULT SetPoint([in] INT x, [in] INT y);
+	[helpstring("method SetDoPropagate")] HRESULT SetDoPropagate([in] BOOL doPropagate);
+	[helpstring("method GetDoPropagate")] HRESULT GetDoPropagate([out,retval] BOOL* doPropagate);
+	[helpstring("method SetEventType")] HRESULT SetEventType([in] enum AveMouseEvent eventType);
+	[helpstring("method SetDoCapture")] HRESULT SetDoCapture([in] BOOL doCapture);
+	[helpstring("method GetDoCapture")] HRESULT GetDoCapture([out,retval] BOOL* doCapture);
+};
+[
+	object,
+	uuid(A5A268EE-47BF-4E8F-8094-A09CABE5AF34),
+	helpstring("IAveMouseEventHandler Interface"),
+	pointer_default(unique)
+]
+interface IAveMouseEventHandler : IUnknown{
+	[helpstring("method OnMouseEvent")] HRESULT OnMouseEvent([in] IMouseEvent* mouseEvent);
+};
+[
+	object,
+	uuid(B10FE11C-0795-4054-91E0-AA20F3689517),
+	helpstring("IAveMediaPlayer Interface"),
+	pointer_default(unique)
+]
+interface IAveMediaPlayer : IUnknown{
+	[helpstring("method IsPlaying")] HRESULT IsPlaying([out,retval] BOOL* isPlaying);
+	[helpstring("method IsPaused")] HRESULT IsPaused([out,retval] BOOL* isPaused);
+	[helpstring("method Play")] HRESULT Play(void);
+	[helpstring("method Next")] HRESULT Next(void);
+	[helpstring("method Previous")] HRESULT Previous(void);
+	[helpstring("method Pause")] HRESULT Pause(void);
+	[helpstring("method Stop")] HRESULT Stop(void);
+	[helpstring("method OpenFile")] HRESULT OpenFile(void);
+	[helpstring("method Connect")] HRESULT Connect(void);
+	[helpstring("method Disconnect")] HRESULT Disconnect(void);
+	[helpstring("method IsConnected")] HRESULT IsConnected(void);
+	[helpstring("method PerformCommand")] HRESULT PerformCommand([in] BSTR command);
+	[helpstring("method Register")] HRESULT Register([in] IMediaPlayerEventHandler* handler);
+	[helpstring("method Unregister")] HRESULT Unregister([in] IMediaPlayerEventHandler* handler);
+	[helpstring("method PlayPause")] HRESULT PlayPause(void);
+	[helpstring("method GetSongProgress")] HRESULT GetSongProgress([out,retval] float* progress);
+	[helpstring("method SetSongProgress")] HRESULT SetSongProgress([in] float progress);
+	[helpstring("method GetVolumeLevel")] HRESULT GetVolumeLevel([out,retval] float* level);
+	[helpstring("method SetVolumeLevel")] HRESULT SetVolumeLevel([in] float level);
+	[helpstring("method GetMute")] HRESULT GetMute([out,retval] BOOL* mute);
+	[helpstring("method SetMute")] HRESULT SetMute([in] BOOL mute);
+	[helpstring("method GetShuffle")] HRESULT GetShuffle([out,retval] BOOL* shuffle);
+	[helpstring("method SetShuffle")] HRESULT SetShuffle([in] BOOL shuffle);
+	[helpstring("method GetRepeat")] HRESULT GetRepeat([out,retval] BOOL* doRepeat);
+	[helpstring("method SetRepeat")] HRESULT SetRepeat([in] BOOL doRepeat);
+	[helpstring("method GetInfoString")] HRESULT GetInfoString([in] BSTR infoName, [out,retval] BSTR* info);
+};
+[
+	object,
+	uuid(6FD96829-CC1D-4DFF-AD61-F9A64EB279A5),
+	helpstring("IAveMediaPlayerITunes Interface"),
+	pointer_default(unique)
+]
+interface IAveMediaPlayerITunes : IUnknown{
+};
+[
+	object,
+	uuid(737EB570-F843-44FA-B87E-E46CDAC0DB8C),
+	helpstring("IMediaPlayerProvider Interface"),
+	pointer_default(unique)
+]
+interface IMediaPlayerProvider : IUnknown{
+	[helpstring("method GetMediaPlayer")] HRESULT GetMediaPlayer([out,retval] IAveMediaPlayer** player);
+	[helpstring("method Register")] HRESULT Register([in] IMediaPlayerProviderEventHandler* handler);
+	[helpstring("method Unregister")] HRESULT Unregister([in] IMediaPlayerProviderEventHandler* handler);
+	[helpstring("method ForceConnect")] HRESULT ForceConnect(void);
+};
+[
+	object,
+	uuid(FA76D3C2-D5F0-4499-B466-6C330BB172B8),
+	helpstring("IMediaPlayerProviderEventHandler Interface"),
+	pointer_default(unique)
+]
+interface IMediaPlayerProviderEventHandler : IUnknown{
+	[helpstring("method OnMediaPlayerProviderEvent")] HRESULT OnMediaPlayerProviderEvent([in] enum MediaPlayerProviderEvent providerEvent, [in] IMediaPlayerProvider* provider);
+};
+[
+	object,
+	uuid(AA6AD86D-5DE4-4391-8743-ED03BB432F2A),
+	helpstring("IMediaPlayerEventHandler Interface"),
+	pointer_default(unique)
+]
+interface IMediaPlayerEventHandler : IUnknown{
+	[helpstring("method OnMediaPlayerEvent")] HRESULT OnMediaPlayerEvent([in] enum MediaPlayerEventType eventType, [in] IAveMediaPlayer* player);
+};
+[
+	object,
+	uuid(0CFD6485-312D-4695-8D9B-C39E06E41EEC),
+	helpstring("IRenderableProgressBar Interface"),
+	pointer_default(unique)
+]
+interface IRenderableProgressBar : IUnknown{
+};
+[
+	object,
+	uuid(F3E929F8-7C04-4479-846E-5140308814C6),
+	helpstring("ITimerProvider Interface"),
+	pointer_default(unique)
+]
+interface ITimerProvider : IUnknown{
+	[helpstring("method AddTimer")] HRESULT AddTimer([in] ITimerEventHandler* handler, [out,retval] DWORD* dwCookie);
+	[helpstring("method RemoveTimer")] HRESULT RemoveTimer([in] DWORD dwCookie);
+	[helpstring("method StartTimer")] HRESULT StartTimer([in] DWORD dwCookie, [in] UINT interval);
+	[helpstring("method StopTimer")] HRESULT StopTimer([in] DWORD dwCookie);
+};
+[
+	object,
+	uuid(3CFF51B0-8392-4534-9E7D-D9D9B2754E39),
+	helpstring("ITimerEventHandler Interface"),
+	pointer_default(unique)
+]
+interface ITimerEventHandler : IUnknown{
+	[helpstring("method OnTimerEvent")] HRESULT OnTimerEvent([in] enum TimerEvent eventType, [in] ITimerProvider* provider, [in] DWORD dwCookie);
+};
+[
+	object,
+	uuid(681EEBAE-38EC-45C2-82A6-736EE07E0414),
+	helpstring("IRenderableImageAnimation Interface"),
+	pointer_default(unique)
+]
+interface IRenderableImageAnimation : IUnknown{
+};
+[
+	object,
+	uuid(E44B8E0D-C6E0-4F9E-A790-0850C42A9052),
+	helpstring("IAveMediaPlayerWMP Interface"),
+	pointer_default(unique)
+]
+interface IAveMediaPlayerWMP : IUnknown{
+	[helpstring("method ConnectToWMPCore")] HRESULT ConnectToWMPCore([in] IUnknown* core);
+};
+[
+	object,
+	uuid(982825ED-EA66-4515-8FFA-2D08CB39E0DA),
+	helpstring("IRenderableText Interface"),
+	pointer_default(unique)
+]
+interface IRenderableText : IUnknown{
+};
+
+[
+	object,
+	uuid(0CBEAB35-F832-4598-A105-D9733BECF5C2),
+	helpstring("IDCTexture Interface"),
+	pointer_default(unique)
+]
+interface IDCTexture : IUnknown{
+	[helpstring("method Create")] HRESULT Create([in] DWORD width, DWORD height, [in] enum AvePixelType pixelType, [in]IUnknown* directDeviceAsUnknown);
+	[helpstring("method GetDC")] HRESULT GetDC([out,retval] HDC* dc);
+	[helpstring("method UpdateRect")] HRESULT UpdateRect([in] RECT* rc);
+	[helpstring("method Destroy")] HRESULT Destroy(void);
+	[helpstring("method GetSize")] HRESULT GetSize([out] DWORD* width, DWORD* height);
+	[helpstring("method GetTexture")] HRESULT GetTexture([out,retval] IUnknown** unknownAsTexture);
+};
+[
+	uuid(5544F62F-19FA-4383-AB6A-ED96ACABA1EE),
+	version(1.0),
+	helpstring("MediaPlayer 1.0 Type Library")
+]
+library MediaPlayerLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(73D7F162-D6EE-4506-873E-1AFFAAA4509C),
+		helpstring("DesktopEffectMediaPlayer Class")
+	]
+	coclass DesktopEffectMediaPlayer
+	{
+		[default] interface IDesktopEffectMediaPlayer;
+	};
+	[
+		uuid(7EAC794A-F5CB-46F6-817D-24DDC80B0362),
+		helpstring("RenderOptions Class")
+	]
+	coclass RenderOptions
+	{
+		[default] interface IRenderOptions;
+	};
+	[
+		uuid(185290A8-54D7-4EFB-8FC7-D5C64975B9EE),
+		helpstring("Renderable Class")
+	]
+	coclass Renderable
+	{
+		[default] interface IRenderable;
+	};
+	[
+		uuid(8E02CF36-DA47-4636-B0A8-9B61E2BBE8C8),
+		helpstring("SkinItem Class")
+	]
+	coclass SkinItem
+	{
+		[default] interface ISkinItem;
+	};
+	[
+		uuid(5B86ED8C-50BE-4F92-90AA-24F8CDFD5FD8),
+		helpstring("SkinOptions Class")
+	]
+	coclass SkinOptions
+	{
+		[default] interface ISkinOptions;
+	};
+	[
+		uuid(E3C18970-4DFD-43C7-A035-D55CA4E1EC51),
+		helpstring("Skin Class")
+	]
+	coclass Skin
+	{
+		[default] interface ISkin;
+	};
+	[
+		uuid(B06DF46A-2885-403B-A868-284093EEC4A7),
+		helpstring("RenderableImage Class")
+	]
+	coclass RenderableImage
+	{
+		[default] interface IRenderableImage;
+	};
+	[
+		uuid(96F8EB28-CC7C-4568-889E-3C6F5537CCF2),
+		helpstring("AveImage Class")
+	]
+	coclass AveImage
+	{
+		[default] interface IAveImage;
+	};
+	[
+		uuid(1E5AE03C-1B54-49C9-9DD4-4EB9FD4202B7),
+		helpstring("RenderableButton Class")
+	]
+	coclass RenderableButton
+	{
+		[default] interface IRenderableButton;
+	};
+	[
+		uuid(D8B6A24A-9C46-4359-988C-1B5442E03C5C),
+		helpstring("RenderRequestable Class")
+	]
+	coclass RenderRequestable
+	{
+		[default] interface IRenderRequestable;
+	};
+	[
+		uuid(FCE093C4-D0B0-4AD8-AD56-3C6B6428F480),
+		helpstring("MouseEvent Class")
+	]
+	coclass MouseEvent
+	{
+		[default] interface IMouseEvent;
+	};
+	[
+		uuid(308EB1CD-760B-4356-9608-4C0696AE9A4E),
+		helpstring("AveMouseEventHandler Class")
+	]
+	coclass AveMouseEventHandler
+	{
+		[default] interface IAveMouseEventHandler;
+	};
+	[
+		uuid(E5C8F5B7-0412-4530-8D3A-8D55F471C57D),
+		helpstring("AveMediaPlayer Class")
+	]
+	coclass AveMediaPlayer
+	{
+		[default] interface IAveMediaPlayer;
+	};
+	[
+		uuid(B901ED83-CF00-490A-AA7A-A87D2CDEBB82),
+		helpstring("AveMediaPlayerITunes Class")
+	]
+	coclass AveMediaPlayerITunes
+	{
+		[default] interface IAveMediaPlayerITunes;
+	};
+	[
+		uuid(BE02359F-5195-40E2-87D7-1CBD39134583),
+		helpstring("MediaPlayerProvider Class")
+	]
+	coclass MediaPlayerProvider
+	{
+		[default] interface IMediaPlayerProvider;
+	};
+	[
+		uuid(4667981A-0890-4427-9F5D-92D1D8CB1AE4),
+		helpstring("MediaPlayerProviderEventHandler Class")
+	]
+	coclass MediaPlayerProviderEventHandler
+	{
+		[default] interface IMediaPlayerProviderEventHandler;
+	};
+	[
+		uuid(B3AD1232-62F4-4DB3-BBD4-34BBCE11B947),
+		helpstring("MediaPlayerEventHandler Class")
+	]
+	coclass MediaPlayerEventHandler
+	{
+		[default] interface IMediaPlayerEventHandler;
+	};
+	[
+		uuid(1287EC4D-C5F9-45F2-8DDF-E9728BBF51EE),
+		helpstring("RenderableProgressBar Class")
+	]
+	coclass RenderableProgressBar
+	{
+		[default] interface IRenderableProgressBar;
+	};
+	[
+		uuid(7BDD2116-267A-42AD-A3E6-05C5E315B989),
+		helpstring("TimerProvider Class")
+	]
+	coclass TimerProvider
+	{
+		[default] interface ITimerProvider;
+	};
+	[
+		uuid(1FBC40AC-DD5A-497F-A04B-051FEB6B1071),
+		helpstring("TimerEventHandler Class")
+	]
+	coclass TimerEventHandler
+	{
+		[default] interface ITimerEventHandler;
+	};
+	[
+		uuid(B0470F5C-7462-45A7-992B-611EB78D8264),
+		helpstring("RenderableImageAnimation Class")
+	]
+	coclass RenderableImageAnimation
+	{
+		[default] interface IRenderableImageAnimation;
+	};
+	[
+		uuid(8A272D71-45B3-461C-8A4D-37EC32083152),
+		helpstring("AveMediaPlayerWMP Class")
+	]
+	coclass AveMediaPlayerWMP
+	{
+		[default] interface IAveMediaPlayerWMP;
+	};
+	[
+		uuid(DCF9A368-5C1F-4407-9CD4-C2CB6158D434),
+		helpstring("RenderableText Class")
+	]
+	coclass RenderableText
+	{
+		[default] interface IRenderableImageAnimation;
+	};
+	[
+		uuid(065018B1-DBDF-4260-97DC-8F908C753D4D),
+		helpstring("DCTexture Class")
+	]
+	coclass DCTexture
+	{
+		[default] interface IDCTexture;
+	};
+};

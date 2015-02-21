@@ -1,0 +1,26 @@
+HKCR
+{
+	MediaPlayer.AveImage.1 = s 'AveImage Class'
+	{
+		CLSID = s '{96F8EB28-CC7C-4568-889E-3C6F5537CCF2}'
+	}
+	MediaPlayer.AveImage = s 'AveImage Class'
+	{
+		CLSID = s '{96F8EB28-CC7C-4568-889E-3C6F5537CCF2}'
+		CurVer = s 'MediaPlayer.AveImage.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {96F8EB28-CC7C-4568-889E-3C6F5537CCF2} = s 'AveImage Class'
+		{
+			ProgID = s 'MediaPlayer.AveImage.1'
+			VersionIndependentProgID = s 'MediaPlayer.AveImage'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{5544F62F-19FA-4383-AB6A-ED96ACABA1EE}'
+		}
+	}
+}

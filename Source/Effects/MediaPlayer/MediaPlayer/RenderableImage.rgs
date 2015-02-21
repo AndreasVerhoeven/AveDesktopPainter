@@ -1,0 +1,26 @@
+HKCR
+{
+	MediaPlayer.RenderableImage.1 = s 'RenderableImage Class'
+	{
+		CLSID = s '{B06DF46A-2885-403B-A868-284093EEC4A7}'
+	}
+	MediaPlayer.RenderableImage = s 'RenderableImage Class'
+	{
+		CLSID = s '{B06DF46A-2885-403B-A868-284093EEC4A7}'
+		CurVer = s 'MediaPlayer.RenderableImage.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {B06DF46A-2885-403B-A868-284093EEC4A7} = s 'RenderableImage Class'
+		{
+			ProgID = s 'MediaPlayer.RenderableImage.1'
+			VersionIndependentProgID = s 'MediaPlayer.RenderableImage'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{5544F62F-19FA-4383-AB6A-ED96ACABA1EE}'
+		}
+	}
+}

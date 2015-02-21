@@ -1,0 +1,26 @@
+HKCR
+{
+	AveRenderer.DCLayer.1 = s 'DCLayer Class'
+	{
+		CLSID = s '{6D955C2C-90A3-4BE3-98BD-CB5920AFDB7A}'
+	}
+	AveRenderer.DCLayer = s 'DCLayer Class'
+	{
+		CLSID = s '{6D955C2C-90A3-4BE3-98BD-CB5920AFDB7A}'
+		CurVer = s 'AveRenderer.DCLayer.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {6D955C2C-90A3-4BE3-98BD-CB5920AFDB7A} = s 'DCLayer Class'
+		{
+			ProgID = s 'AveRenderer.DCLayer.1'
+			VersionIndependentProgID = s 'AveRenderer.DCLayer'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{94FE846F-A859-4C5A-9FBC-FF8B0183880B}'
+		}
+	}
+}

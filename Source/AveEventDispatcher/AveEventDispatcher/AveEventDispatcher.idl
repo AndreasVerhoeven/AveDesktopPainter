@@ -1,0 +1,88 @@
+// AveEventDispatcher.idl : IDL source for AveEventDispatcher
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (AveEventDispatcher.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+import "../../AveRenderer/AveRenderer/AveRenderer.idl";
+
+interface IAveLayerEventDispatcher;
+
+[
+	object,
+	uuid(46D8E742-D2E9-44AD-A6D0-80B60499BA3D),
+	helpstring("IAveEventHandler Interface"),
+	pointer_default(unique)
+]
+interface IAveEventHandler : IUnknown{
+	[helpstring("method OnMouseEnter")] HRESULT OnMouseEnter([in]IAveLayerEventDispatcher* eventDispatcher, [in] IAveHitTestChain* chain, [out] DWORD* pWhatToDo, [in] float fx, [in] float fy);
+	[helpstring("method OnMouseMove")] HRESULT OnMouseMove([in]IAveLayerEventDispatcher* eventDispatcher, [in] IAveHitTestChain* chain, [out] DWORD* pWhatToDo, [in] float fx, [in] float fy);
+	[helpstring("method OnMouseLeave")] HRESULT OnMouseLeave([in]IAveLayerEventDispatcher* eventDispatcher, [in] IAveHitTestChain* chain, [out] DWORD* pWhatToDo);
+	[helpstring("method OnMouseWheel")] HRESULT OnMouseWheel([in]IAveLayerEventDispatcher* eventDispatcher, [in] IAveHitTestChain* chain, [out] DWORD* pWhatToDo, [in] float fx, [in] float fy, [in] float delta, [in] DWORD keys);
+
+	[helpstring("method OnLeftButtonDown")] HRESULT OnLeftButtonDown([in]IAveLayerEventDispatcher* eventDispatcher, [in] IAveHitTestChain* chain, [out] DWORD* pWhatToDo, [in] float fx, [in] float fy, [in] DWORD keys);
+	[helpstring("method OnLeftButtonUp")] HRESULT OnLeftButtonUp([in]IAveLayerEventDispatcher* eventDispatcher, [in] IAveHitTestChain* chain, [out] DWORD* pWhatToDo, [in] float fx, [in] float fy, [in] DWORD keys);
+	[helpstring("method OnLeftButtonClick")] HRESULT OnLeftButtonClick([in]IAveLayerEventDispatcher* eventDispatcher, [in] IAveHitTestChain* chain, [out] DWORD* pWhatToDo, [in] float fx, [in] float fy, [in] DWORD keys);
+
+	[helpstring("method OnCaptureChanged")] HRESULT OnCaptureChanged([in]IAveLayerEventDispatcher* eventDispatcher, [in] IAveHitTestChain* chain, [out] DWORD* pWhatToDo);
+};
+[
+	object,
+	uuid(4D8AE035-42CB-4BF7-BC1C-39074718C8D2),
+	helpstring("IAveEventDispatcherCallback Interface"),
+	pointer_default(unique)
+]
+interface IAveEventDispatcherCallback : IUnknown{
+	[helpstring("method GetHitTestChainForPoint")] HRESULT GetHitTestChainForPoint([in] DWORD x, [in] DWORD y, [out] IAveHitTestChain** pChain);
+	[helpstring("method DoSetCapture")] HRESULT DoSetCapture(void);
+	[helpstring("method DoKillCapture")] HRESULT DoKillCapture(void);
+};
+[
+	object,
+	uuid(525E9EC3-0EC5-4F63-B7B3-7F53AD11B47D),
+	helpstring("IAveLayerEventDispatcher Interface"),
+	pointer_default(unique)
+]
+interface IAveLayerEventDispatcher : IUnknown{
+	[helpstring("method OnWindowMessage")] HRESULT OnWindowMessage([in] HWND hwnd, [in] UINT msg, [in] WPARAM wParam, [in] LPARAM lParam, [out] LRESULT* lResult, [out] BOOL* bHandled);
+	[helpstring("method SetEventDispatcherCallback")] HRESULT SetEventDispatcherCallback([in] IAveEventDispatcherCallback* callback);
+	[helpstring("method StartMouseCapture")] HRESULT StartMouseCapture(void);
+	[helpstring("method StopMouseCapture")] HRESULT StopMouseCapture(void);
+	[helpstring("method IsMouseCaptured")] HRESULT IsMouseCaptured([out,retval] BOOL* pIsCaptured);
+};
+[
+	uuid(4648991D-E49E-4950-A018-37A4007A9F30),
+	version(1.0),
+	helpstring("AveEventDispatcher 1.0 Type Library")
+]
+library AveEventDispatcherLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(C53131DA-FC1A-4B66-9A54-DE63715AE44F),
+		helpstring("AveEventHandler Class")
+	]
+	coclass AveEventHandler
+	{
+		[default] interface IAveEventHandler;
+	};
+	[
+		uuid(EBAD241E-8190-4D98-9724-FF8EACAA3E24),
+		helpstring("AveEventDispatcherCallback Class")
+	]
+	coclass AveEventDispatcherCallback
+	{
+		[default] interface IAveEventDispatcherCallback;
+	};
+	[
+		uuid(F6E14ABD-E8CA-4720-B584-6CA5C1E12981),
+		helpstring("AveLayerEventDispatcher Class")
+	]
+	coclass AveLayerEventDispatcher
+	{
+		[default] interface IAveLayerEventDispatcher;
+	};
+};

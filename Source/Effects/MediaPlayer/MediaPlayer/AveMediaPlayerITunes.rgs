@@ -1,0 +1,27 @@
+HKCR
+{
+	MediaPlayer.AveMediaPlayerITunes.1 = s 'AveMediaPlayerITunes Class'
+	{
+		CLSID = s '{B901ED83-CF00-490A-AA7A-A87D2CDEBB82}'
+	}
+	MediaPlayer.AveMediaPlayerITunes = s 'AveMediaPlayerITunes Class'
+	{
+		CLSID = s '{B901ED83-CF00-490A-AA7A-A87D2CDEBB82}'
+		CurVer = s 'MediaPlayer.AveMediaPlayerITunes.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {B901ED83-CF00-490A-AA7A-A87D2CDEBB82} = s 'AveMediaPlayerITunes Class'
+		{
+			ProgID = s 'MediaPlayer.AveMediaPlayerITunes.1'
+			VersionIndependentProgID = s 'MediaPlayer.AveMediaPlayerITunes'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{5544F62F-19FA-4383-AB6A-ED96ACABA1EE}'
+		}
+	}
+}

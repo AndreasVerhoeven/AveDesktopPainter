@@ -1,0 +1,26 @@
+HKCR
+{
+	AveSkinProvider.AveSkinInfo.1 = s 'AveSkinInfo Class'
+	{
+		CLSID = s '{16DE81B5-7B1A-404E-9321-1F9F7BBBDF75}'
+	}
+	AveSkinProvider.AveSkinInfo = s 'AveSkinInfo Class'
+	{
+		CLSID = s '{16DE81B5-7B1A-404E-9321-1F9F7BBBDF75}'
+		CurVer = s 'AveSkinProvider.AveSkinInfo.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {16DE81B5-7B1A-404E-9321-1F9F7BBBDF75} = s 'AveSkinInfo Class'
+		{
+			ProgID = s 'AveSkinProvider.AveSkinInfo.1'
+			VersionIndependentProgID = s 'AveSkinProvider.AveSkinInfo'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{B0124F3E-6F2F-4655-92C2-44B9E1A19051}'
+		}
+	}
+}

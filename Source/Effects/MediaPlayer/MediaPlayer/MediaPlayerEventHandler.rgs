@@ -1,0 +1,26 @@
+HKCR
+{
+	MediaPlayer.MediaPlayerEventHandler.1 = s 'MediaPlayerEventHandler Class'
+	{
+		CLSID = s '{B3AD1232-62F4-4DB3-BBD4-34BBCE11B947}'
+	}
+	MediaPlayer.MediaPlayerEventHandler = s 'MediaPlayerEventHandler Class'
+	{
+		CLSID = s '{B3AD1232-62F4-4DB3-BBD4-34BBCE11B947}'
+		CurVer = s 'MediaPlayer.MediaPlayerEventHandler.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {B3AD1232-62F4-4DB3-BBD4-34BBCE11B947} = s 'MediaPlayerEventHandler Class'
+		{
+			ProgID = s 'MediaPlayer.MediaPlayerEventHandler.1'
+			VersionIndependentProgID = s 'MediaPlayer.MediaPlayerEventHandler'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{5544F62F-19FA-4383-AB6A-ED96ACABA1EE}'
+		}
+	}
+}

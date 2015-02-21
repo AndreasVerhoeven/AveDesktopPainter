@@ -1,0 +1,26 @@
+HKCR
+{
+	AveDesktopApp.AvePresenter.1 = s 'AvePresenter Class'
+	{
+		CLSID = s '{638F8362-938D-41A7-B9B3-587AB98EEB7D}'
+	}
+	AveDesktopApp.AvePresenter = s 'AvePresenter Class'
+	{
+		CLSID = s '{638F8362-938D-41A7-B9B3-587AB98EEB7D}'
+		CurVer = s 'AveDesktopApp.AvePresenter.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {638F8362-938D-41A7-B9B3-587AB98EEB7D} = s 'AvePresenter Class'
+		{
+			ProgID = s 'AveDesktopApp.AvePresenter.1'
+			VersionIndependentProgID = s 'AveDesktopApp.AvePresenter'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{21FC0FDF-8BCC-42D9-9A8B-F15331090993}'
+		}
+	}
+}

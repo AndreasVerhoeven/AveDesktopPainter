@@ -1,0 +1,26 @@
+HKCR
+{
+	MediaPlayer.DCTexture.1 = s 'DCTexture Class'
+	{
+		CLSID = s '{065018B1-DBDF-4260-97DC-8F908C753D4D}'
+	}
+	MediaPlayer.DCTexture = s 'DCTexture Class'
+	{
+		CLSID = s '{065018B1-DBDF-4260-97DC-8F908C753D4D}'
+		CurVer = s 'MediaPlayer.DCTexture.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {065018B1-DBDF-4260-97DC-8F908C753D4D} = s 'DCTexture Class'
+		{
+			ProgID = s 'MediaPlayer.DCTexture.1'
+			VersionIndependentProgID = s 'MediaPlayer.DCTexture'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{5544F62F-19FA-4383-AB6A-ED96ACABA1EE}'
+		}
+	}
+}

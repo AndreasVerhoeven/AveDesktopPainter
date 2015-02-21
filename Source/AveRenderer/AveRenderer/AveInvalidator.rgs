@@ -1,0 +1,26 @@
+HKCR
+{
+	AveRenderer.AveInvalidator.1 = s 'AveInvalidator Class'
+	{
+		CLSID = s '{0E304183-3D5B-4C71-8B55-157A18F13657}'
+	}
+	AveRenderer.AveInvalidator = s 'AveInvalidator Class'
+	{
+		CLSID = s '{0E304183-3D5B-4C71-8B55-157A18F13657}'
+		CurVer = s 'AveRenderer.AveInvalidator.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {0E304183-3D5B-4C71-8B55-157A18F13657} = s 'AveInvalidator Class'
+		{
+			ProgID = s 'AveRenderer.AveInvalidator.1'
+			VersionIndependentProgID = s 'AveRenderer.AveInvalidator'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{94FE846F-A859-4C5A-9FBC-FF8B0183880B}'
+		}
+	}
+}

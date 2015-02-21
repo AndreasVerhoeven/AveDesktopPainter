@@ -1,0 +1,13 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'AveDesktopApp'
+		'AveDesktopApp.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}
+
+

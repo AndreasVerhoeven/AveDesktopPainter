@@ -1,0 +1,9 @@
+; AveSkinProvider.def : Declares the module parameters.
+
+LIBRARY      "AveSkinProvider.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

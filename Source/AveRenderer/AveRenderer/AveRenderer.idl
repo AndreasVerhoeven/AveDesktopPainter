@@ -1,0 +1,388 @@
+// AveRenderer.idl : IDL source for AveRenderer
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (AveRenderer.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+#include "RECTF.h"
+
+
+interface IAveLayer;
+interface IAveInvalidator;
+interface ICompositerNotificationHandler;
+interface IAveLayerList;
+interface IAveHitTestChain;
+
+[
+	object,
+	uuid(10337ACA-AEA6-47F7-AD77-16100D675A21),
+	helpstring("IAveCompositer Interface"),
+	pointer_default(unique)
+]
+interface IAveCompositer : IUnknown{
+	[helpstring("method Initialize")] HRESULT Initialize([in] IUnknown* directDevice);
+	[helpstring("method Uninitialize")] HRESULT Uninitialize(void);
+	[helpstring("method AddLayer")] HRESULT AddLayer([in] IAveLayer* layer, [in]IAveLayer* insertAfter);
+	[helpstring("method RemoveLayer")] HRESULT RemoveLayer([in] IAveLayer* layer);
+	[helpstring("method GetLayerCount")] HRESULT GetLayerCount([out,retval] DWORD* layerCount);
+	[helpstring("method GetLayerByIndex")] HRESULT GetLayerByIndex([in] DWORD index, [out, retval] IAveLayer** layer);
+	[helpstring("method SetNotificationHandler")] HRESULT SetNotificationHandler([in] ICompositerNotificationHandler* handler);
+	[helpstring("method GetNotificationHandler")] HRESULT GetNotificationHandler([out,retval] ICompositerNotificationHandler** pHandler);
+	[helpstring("method Render")] HRESULT Render([in] HWND hwnd);
+	[helpstring("method SetSize")] HRESULT SetSize(float cx, float cy);
+};
+[
+	object,
+	uuid(A21B56C1-78A7-46D4-B988-B8560A2DD59A),
+	helpstring("IAveLayer Interface"),
+	pointer_default(unique)
+]
+interface IAveLayer : IUnknown{
+
+	[helpstring("method Initialize")] HRESULT Initialize([in] IUnknown* directDevice);
+	[helpstring("method Uninitialize")] HRESULT Uninitialize(void);
+	[helpstring("method SetInvalidator")] HRESULT SetInvalidator([in] IAveInvalidator* invalidator);
+	[helpstring("method GetInvalidator")] HRESULT GetInvalidator([out,retval] IAveInvalidator** invalidator);
+	[helpstring("method PreRender")] HRESULT PreRender(void);
+	[helpstring("method GetIsVisible")] HRESULT GetIsVisible([out,retval] BOOL* pIsVisible);
+	[helpstring("method SetIsVisible")] HRESULT SetIsVisible([in] BOOL isVisible);
+	[helpstring("method GetSourceRect")] HRESULT GetSourceRect([out,retval] RECTF* pRect);
+	[helpstring("method SetSourceRect")] HRESULT SetSourceRect([in] RECTF* pRect);
+	[helpstring("method GetDestinationRect")] HRESULT GetDestinationRect([out,retval] RECT* pRect);
+	[helpstring("method SetDestinationRect")] HRESULT SetDestinationRect([in] RECT* pRect);
+	[helpstring("method SetXScalingFactor")] HRESULT SetXScalingFactor([in] float xScalingFactor);
+	[helpstring("method SetYScalingFactor")] HRESULT SetYScalingFactor([in] float yScalingFactor);
+	[helpstring("method GetXScalingFactor")] HRESULT GetXScalingFactor([out,retval] float* pXScalingFactor);
+	[helpstring("method GetYScalingFactor")] HRESULT GetYScalingFactor([out,retval] float* pYScalingFactor);
+	[helpstring("method SetRotation In Radians")] HRESULT SetRotation([in] float radRotation);
+	[helpstring("method GetRotation")] HRESULT GetRotation([out,retval] float* pRadRotation);
+	[helpstring("method GetTexture")] HRESULT GetTexture([out,retval] IUnknown** textureAsUnknown);
+	[helpstring("method SetOpacity")] HRESULT SetOpacity([in] float opacity);
+	[helpstring("method GetOpacity")] HRESULT GetOpacity([out,retval] float* pOpacity);
+	[helpstring("method GetPreferredFilterQuality")] HRESULT GetPreferredFilterQuality([in] DWORD filterType, [out,retval] DWORD* pFilterQuality);
+	[helpstring("method GetIsDirty")] HRESULT GetIsDirty([out,retval] BOOL* pIsDirty);
+	[helpstring("method SetColorOverlay")] HRESULT SetColorOverlay(DWORD colorOverlay);
+	[helpstring("method GetColorOverlay")] HRESULT GetColorOverlay(DWORD* pColorOverlay);
+	[helpstring("method ConvertPointToLayer")] HRESULT ConvertPointToLayer(float fx, float fy, float* lx, float* ly);
+	[helpstring("method HitTest")] HRESULT HitTest(float fx, float fy, float* lx, float* ly, IAveLayer** hittedLayer);
+	[helpstring("method HitTestChain")] HRESULT HitTestChain(float fx, float fy, IAveHitTestChain* chain);
+	[helpstring("method SetNoAlphaBlendedHitTesting")] HRESULT SetNoAlphaBlendedHitTesting(BOOL noAlphaBlendedHitTesting);
+	[helpstring("method SetNeverHitTest")] HRESULT SetNeverHitTest(BOOL neverHitTest);
+	[helpstring("method GetNoAlphaBlendedHitTesting")] HRESULT GetNoAlphaBlendedHitTesting(BOOL* pNoAlphaBlendedHitTesting);
+	[helpstring("method GetNeverHitTest")] HRESULT GetNeverHitTest(BOOL* pNeverHitTest);
+	[helpstring("SetEventHandler")] HRESULT SetEventHandler([in]IUnknown* eventHandler);
+	[helpstring("GetEventHandler")] HRESULT GetEventHandler([out, retval] IUnknown** pEventHandler);
+	[helpstring("SetName")] HRESULT SetName([in]BSTR name);
+	[helpstring("SetName")] HRESULT GetName([out]BSTR* pName);
+	[helpstring("method GetDevice")] HRESULT GetDevice([out,retval] IUnknown** pDeviceAsUnknown);
+	[helpstring("method SetProperty")] HRESULT SetProperty([in] BSTR name, [in] VARIANT value);
+	[helpstring("method GetPropertyType")] HRESULT GetPropertyType([in] BSTR name, [in] DWORD* pType);
+	[helpstring("method GetMaskTexture")] HRESULT GetMaskTexture([out,retval] IUnknown** textureAsUnknown);
+	[helpstring("method SetMaskSourceRect")] HRESULT SetMaskSourceRect([in] RECTF* pRectF);
+	[helpstring("method GetMaskSourceRect")] HRESULT GetMaskSourceRect([out,retval] RECTF* pRectF);
+	[helpstring("method SetIsFlipped")] HRESULT SetIsFlipped([in]BOOL bIsFlipped);
+	[helpstring("method GetIsFlipped")] HRESULT GetIsFlipped([out,retval]BOOL* pIsFlipped);
+	[helpstring("method SetIsMirrored")] HRESULT SetIsMirrored([in]BOOL bIsMirrored);
+	[helpstring("method GetIsMirrored")] HRESULT GetIsMirrored([out,retval]BOOL* pIsMirrored);
+};
+[
+	object,
+	uuid(6C5AD431-340E-4478-B763-85AC8423F3E9),
+	helpstring("IAveInvalidator Interface"),
+	pointer_default(unique)
+]
+interface IAveInvalidator : IUnknown{
+	[helpstring("method Invalidate")] HRESULT Invalidate([in] IAveLayer* layer);
+};
+[
+	object,
+	uuid(653D461D-5850-4673-A4C0-695719B04D6A),
+	helpstring("ICompositerNotificationHandler Interface"),
+	pointer_default(unique)
+]
+interface ICompositerNotificationHandler : IUnknown{
+	[helpstring("method RenderNeeded")] HRESULT RenderNeeded(void);
+};
+[
+	object,
+	uuid(9FE45E64-D279-47D7-989C-5146392A9EDF),
+	helpstring("IStaticHBitmapLayer Interface"),
+	pointer_default(unique)
+]
+interface IStaticHBitmapLayer : IAveLayer{
+	[helpstring("method SetHBitmap")] HRESULT SetHBitmap([in] HBITMAP hBitmap, [in] SIZE* pSize, [in] BOOL enableAlpha);
+};
+[
+	object,
+	uuid(6A682999-9B0E-4EDA-9C36-93B5A7870063),
+	helpstring("IDCLayer Interface"),
+	pointer_default(unique)
+]
+interface IDCLayer : IAveLayer{
+	[helpstring("method LockAllocating")] HRESULT LockAllocating();
+	[helpstring("method UnlockAllocating")] HRESULT UnlockAllocating();
+	[helpstring("method GetAllocatingLockCount")] HRESULT GetAllocatingLockCount([out,retval] int* pCount);
+
+	[helpstring("method SetCanvasSize")] HRESULT SetCanvasSize([in] int width, [in] int height);
+	[helpstring("method GetCanvasWidth")] HRESULT GetCanvasWidth([out,retval] int* pWidth);
+	[helpstring("method GetCanvasHeight")] HRESULT GetCanvasHeight([out,retval] int* pHeight);
+	[helpstring("method GetDC")] HRESULT GetDC([out,retval] HDC* pHDC);
+	[helpstring("method SetEnableAlphaBlending")] HRESULT SetEnableAlphaBlending([in] BOOL enableAlphaBlending);
+	[helpstring("method GetEnableAlphaBlending")] HRESULT GetEnableAlphaBlending([out,retval] BOOL* pEnableAlphaBlending);
+	[helpstring("method UpdateRect")] HRESULT UpdateRect([in] RECT* rcDirtyRect);
+	[helpstring("method GetUpdateRect")] HRESULT GetUpdateRect([out,retval] RECT* pUpdateRect);
+	[helpstring("method GetHBitmap")] HRESULT GetHBitmap([out,retval] HBITMAP* pHBitmap);
+};
+[
+	object,
+	uuid(5B6F7D3D-0AF3-4D9A-BD99-22FFCC2E1484),
+	helpstring("ICompositeLayer Interface"),
+	pointer_default(unique)
+]
+interface ICompositeLayer : IAveLayer{
+	[helpstring("method AddLayer")] HRESULT AddLayer([in] IAveLayer* layer, [in]IAveLayer* insertAfter);
+	[helpstring("method RemoveLayer")] HRESULT RemoveLayer([in] IAveLayer* layer);
+	[helpstring("method GetLayerCount")] HRESULT GetLayerCount([out,retval] DWORD* layerCount);
+	[helpstring("method GetLayerByIndex")] HRESULT GetLayerByIndex([in] DWORD index, [out, retval] IAveLayer** layer);
+	[helpstring("method SetSize")] HRESULT SetSize(float cx, float cy);
+	[helpstring("method RemoveAllLayers")] HRESULT RemoveAllLayers(void);
+	[helpstring("method DestroyAllLayers")] HRESULT DestroyAllLayers(void);
+};
+[
+	object,
+	uuid(BF025DAC-CE5B-4070-838C-F937602AC637),
+	helpstring("IWrapperLayer Interface"),
+	pointer_default(unique)
+]
+interface IWrapperLayer : IAveLayer{
+	[helpstring("method SetWrappedLayer")] HRESULT SetWrappedLayer([in] IAveLayer* wrappedLayer);
+	[helpstring("method GetWrappedLayer")] HRESULT GetWrappedLayer([out,retval] IAveLayer** pWrappedLayer);
+};
+[
+	object,
+	uuid(81763A5B-796B-458B-8215-1B58FAFD5115),
+	helpstring("IImageLayer Interface"),
+	pointer_default(unique)
+]
+interface IImageLayer : IAveLayer{
+	[helpstring("method SetFileName")] HRESULT SetFileName([in] BSTR fileName);
+	[helpstring("method GetFileName")] HRESULT GetFileName([out,retval] BSTR* pFileName);
+	[helpstring("method GetImageWidth")] HRESULT GetImageWidth([out,retval] DWORD* width);
+	[helpstring("method GetImageHeight")] HRESULT GetImageHeight([out,retval] DWORD* height);
+	[helpstring("method SetMaskFileName")] HRESULT SetMaskFileName([in] BSTR fileName);
+};
+[
+	object,
+	uuid(13D39AC6-5BD5-4BF9-A160-54B4DCFDBA9E),
+	helpstring("IReflectionLayer Interface"),
+	pointer_default(unique)
+]
+interface IReflectionLayer : IUnknown{
+};
+[
+	object,
+	uuid(B386D544-34D0-4CB1-9123-5E88CD6C5F44),
+	helpstring("IAveLayerList Interface"),
+	pointer_default(unique)
+]
+interface IAveLayerList : IUnknown{
+	[helpstring("method AddLayer")] HRESULT AddLayer([in] IAveLayer* layer);
+	[helpstring("method GetLayer")] HRESULT GetLayer([in] DWORD index, [out,retval] IAveLayer** pLayer);
+	[helpstring("method RemoveLayer")] HRESULT RemoveLayer([in] DWORD index);
+	[helpstring("method GetCount")] HRESULT GetCount([out,retval] DWORD* pCount);
+};
+[
+	object,
+	uuid(9B441A49-B39C-4009-963D-661B45808595),
+	helpstring("IAveHitTestChain Interface"),
+	pointer_default(unique)
+]
+interface IAveHitTestChain : IUnknown{
+	[helpstring("method Add")] HRESULT Add([in] IAveLayer* layer, [in] float fx, float fy);
+	[helpstring("method Get")] HRESULT Get([in] DWORD index, [out] IAveLayer** pLayer, [out] float* pX, [out] float* pY);
+	[helpstring("method GetCount")] HRESULT GetCount([out,retval] DWORD* pCount);
+	[helpstring("method Remove")] HRESULT Remove([in] DWORD index);
+};
+[
+	object,
+	uuid(B10A0FBE-CCBD-4124-887E-B2836A5E2E15),
+	helpstring("ISimpleTextureLayer Interface"),
+	pointer_default(unique)
+]
+interface ISimpleTextureLayer : IAveLayer{
+	[helpstring("method SetTexture")] HRESULT SetTexture([in] IUnknown* texture);
+	[helpstring("method SetMaskFileName")] HRESULT SetMaskFileName([in]BSTR fileName);
+};
+[
+	object,
+	uuid(116A593B-A7C5-41EA-9F1E-5387499CCB9A),
+	helpstring("IAveLayerFactory Interface"),
+	pointer_default(unique)
+]
+interface IAveLayerFactory : IUnknown{
+	[helpstring("method CreateLayer")] HRESULT CreateLayer([in] BSTR name, [in] IUnknown* directDevice, [out] IAveLayer** pLayer, [out]IID* pIID);
+};
+[
+	object,
+	uuid(5FE63218-F6C8-45B4-BB36-9672499640B4),
+	helpstring("IImageTexture Interface"),
+	pointer_default(unique)
+]
+interface IImageTexture : IUnknown{
+	[helpstring("method GetWidth")] HRESULT GetWidth([out,retval] DWORD* pWidth);
+	[helpstring("method GetHeight")] HRESULT GetHeight([out,retval] DWORD* pHeight);
+	[helpstring("method GetTexture")] HRESULT GetTexture([out,retval] IUnknown** pTextureAsUnknown);
+	[helpstring("method GetPixelColorForHitTest")] HRESULT GetPixelColorForHitTest([in] DWORD x, [in] DWORD y, [out,retval] DWORD* pColor);
+};
+[
+	object,
+	uuid(5D71CB7B-030B-47D6-9E5A-F0DBD49B1365),
+	helpstring("IImageSequenceLayer Interface"),
+	pointer_default(unique)
+]
+interface IImageSequenceLayer : IAveLayer{
+	[helpstring("method AddFrame")] HRESULT AddFrame([in] BSTR fileName, [in] DWORD frameDuration);
+	[helpstring("method GetCurrentFrameWidth")] HRESULT GetCurrentFrameWidth([out,retval]DWORD* width);
+	[helpstring("method GetCurrentFrameHeight")] HRESULT GetCurrentFrameHeight([out,retval]DWORD* width);
+	[helpstring("method SetMaskFileName")] HRESULT SetMaskFileName([in]BSTR fileName);
+};
+[
+	uuid(94FE846F-A859-4C5A-9FBC-FF8B0183880B),
+	version(1.0),
+	helpstring("AveRenderer 1.0 Type Library")
+]
+library AveRendererLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(160ADB0B-4275-4527-BDA0-D42EC22B9A52),
+		helpstring("AveCompositer Class")
+	]
+	coclass AveCompositer
+	{
+		[default] interface IAveCompositer;
+	};
+	[
+		uuid(383E850E-4EC7-4DB2-AEDC-E22EBF9CCF18),
+		helpstring("AveLayer Class")
+	]
+	coclass AveLayer
+	{
+		[default] interface IAveLayer;
+	};
+	[
+		uuid(0E304183-3D5B-4C71-8B55-157A18F13657),
+		helpstring("AveInvalidator Class")
+	]
+	coclass AveInvalidator
+	{
+		[default] interface IAveInvalidator;
+	};
+	[
+		uuid(E430483D-BCB2-4D8B-B79A-70D91BB00ABF),
+		helpstring("CCompositerNotificationHandler Class")
+	]
+	coclass CCompositerNotificationHandler
+	{
+		[default] interface ICompositerNotificationHandler;
+	};
+	[
+		uuid(6B547F33-EE55-4A24-9753-3D586F4D5EBC),
+		helpstring("StaticHBitmapLayer Class")
+	]
+	coclass StaticHBitmapLayer
+	{
+		[default] interface IStaticHBitmapLayer;
+	};
+	[
+		uuid(6D955C2C-90A3-4BE3-98BD-CB5920AFDB7A),
+		helpstring("DCLayer Class")
+	]
+	coclass DCLayer
+	{
+		[default] interface IDCLayer;
+	};
+	[
+		uuid(BB0F68C6-3A9C-47E0-AA43-0D87B4C5A47A),
+		helpstring("CompositeLayer Class")
+	]
+	coclass CompositeLayer
+	{
+		[default] interface ICompositeLayer;
+	};
+	[
+		uuid(2EBEE60F-114B-4FBA-9BDC-44A06FB7F40E),
+		helpstring("WrapperLayer Class")
+	]
+	coclass WrapperLayer
+	{
+		[default] interface IWrapperLayer;
+	};
+	[
+		uuid(5957E209-B760-441B-914A-D9E006868FA6),
+		helpstring("ImageLayer Class")
+	]
+	coclass ImageLayer
+	{
+		[default] interface IImageLayer;
+	};
+	[
+		uuid(EBF83E35-B608-4F9C-A94B-349D66C6BBD9),
+		helpstring("ReflectionLayer Class")
+	]
+	coclass ReflectionLayer
+	{
+		[default] interface IReflectionLayer;
+	};
+	[
+		uuid(5515682F-4D26-4378-9C98-4277BDC8C6A1),
+		helpstring("AveLayerList Class")
+	]
+	coclass AveLayerList
+	{
+		[default] interface IAveLayerList;
+	};
+	[
+		uuid(6A766B6B-EE67-4730-8478-F97FF29D1975),
+		helpstring("AveHitTestChain Class")
+	]
+	coclass AveHitTestChain
+	{
+		[default] interface IAveHitTestChain;
+	};
+	[
+		uuid(540DEAA1-28F3-464B-860A-E0E9DAFE4A8E),
+		helpstring("SimpleTextureLayer Class")
+	]
+	coclass SimpleTextureLayer
+	{
+		[default] interface ISimpleTextureLayer;
+	};
+	[
+		uuid(209DDBC2-2883-4786-9B3B-884271669B47),
+		helpstring("AveLayerFactory Class")
+	]
+	coclass AveLayerFactory
+	{
+		[default] interface IAveLayerFactory;
+	};
+	[
+		uuid(29789238-58DD-468A-A748-4BA04D7E3D9E),
+		helpstring("ImageTexture Class")
+	]
+	coclass ImageTexture
+	{
+		[default] interface IImageTexture;
+	};
+	[
+		uuid(4EBAA14C-585A-4651-BAC3-78838516B7AF),
+		helpstring("ImageSequenceLayer Class")
+	]
+	coclass ImageSequenceLayer
+	{
+		[default] interface IImageSequenceLayer;
+	};
+};

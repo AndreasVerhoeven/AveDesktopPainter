@@ -1,0 +1,26 @@
+HKCR
+{
+	AveRenderer.CCompositerNotificationHa.1 = s 'CCompositerNotificationHandler Class'
+	{
+		CLSID = s '{E430483D-BCB2-4D8B-B79A-70D91BB00ABF}'
+	}
+	AveRenderer.CCompositerNotificationHand = s 'CCompositerNotificationHandler Class'
+	{
+		CLSID = s '{E430483D-BCB2-4D8B-B79A-70D91BB00ABF}'
+		CurVer = s 'AveRenderer.CCompositerNotificationHa.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {E430483D-BCB2-4D8B-B79A-70D91BB00ABF} = s 'CCompositerNotificationHandler Class'
+		{
+			ProgID = s 'AveRenderer.CCompositerNotificationHa.1'
+			VersionIndependentProgID = s 'AveRenderer.CCompositerNotificationHand'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{94FE846F-A859-4C5A-9FBC-FF8B0183880B}'
+		}
+	}
+}
